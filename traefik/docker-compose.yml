@@ -4,22 +4,23 @@ services:
   traefik:
     image: "traefik:latest"
     container_name: "traefik"
+    restart: unless-stopped
     depends_on:
       - socket-proxy
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - "./traefik.yml:/traefik.yml:ro"
+      - "./rules:/rules:ro"
+      - "./letsencrypt:/letsencrypt"
     environment:
       - OVH_ENDPOINT=${OVH_ENDPOINT}
       - OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY}
       - OVH_APPLICATION_SECRET=${OVH_APPLICATION_SECRET}
       - OVH_CONSUMER_KEY=${OVH_CONSUMER_KEY}
-    volumes:
-      - "./traefik.yml:/traefik.yml:ro"
-      - "./rules:/rules:ro"
-      - "./letsencrypt:/letsencrypt"
     networks:
-      proxy:
+      - proxy
     labels:
       - "traefik.enable=true"
 
@@ -53,12 +54,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       CONTAINERS: 1
+    networks:
+      - proxy
     labels:
       # Watchtower Update
       - "com.centurylinklabs.watchtower.enable=true"
-    networks:
-      - proxy
 
 networks:
-    proxy:
-      external: true
+  proxy:
+    external: true
