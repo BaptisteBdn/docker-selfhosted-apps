@@ -1,0 +1,24 @@
+entryPoints:
+  http:
+    address: ":80"
+
+  https:
+    address: ":443"
+
+providers:
+  docker:
+    endpoint: "tcp://socket-proxy:2375"
+    exposedByDefault: false
+
+  file:
+    directory: /rules
+    watch: true
+
+certificatesResolvers:
+  mydnschallenge:
+    acme:
+      email: mail@example.com
+      storage: ./letsencrypt/acme.json
+      dnsChallenge:
+        provider: ovh
+        delayBeforeCheck: 10

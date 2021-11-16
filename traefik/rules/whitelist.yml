@@ -1,0 +1,6 @@
+http:
+  middlewares:
+    whitelist:
+      ipWhiteList:
+        sourceRange:
+          - "0.0.0.0/0"
