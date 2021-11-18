@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  fail2ban:
+    image: crazymax/fail2ban:latest
+    container_name: fail2ban
+    restart: unless-stopped
+    volumes:
+      - /var/log:/var/log:ro
+      - ./data:/data
+    environment:
+      - TZ=Europe/Paris
+    network_mode: "host"
+    cap_add:
+    - NET_ADMIN
+    - NET_RAW
+    labels:
+      # Watchtower Update
+      - "com.centurylinklabs.watchtower.enable=true"
