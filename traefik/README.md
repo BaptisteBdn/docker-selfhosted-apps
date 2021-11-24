@@ -1,6 +1,8 @@
 # About
 
-![logo](../_utilities/traefik.logo.png)
+<p align="center">
+<img src="../_utilities/traefik.logo.png" alt="Traefik" title="Traefik" />
+</p>
 
 Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy. 
 It is an Edge Router, it means that it's the door to your platform, and that it intercepts and routes every incoming request.
