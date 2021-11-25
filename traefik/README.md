@@ -9,15 +9,11 @@ It is an Edge Router, it means that it's the door to your platform, and that it 
 
 Traefik is a key component for this selfhosted infrastructure, it is providing the following features :
 
-- Act as a reverse proxy, enabling you to selfhosted multiple services behind a single IP
+- Act as a reverse proxy, enabling you to self-hosted multiple services behind a single IP
 - HTTPS for your services by leveraging Let's Encrypt
 - Easily configure TLS for all services
 - Use a whitelist to restrict services to a fix set of IPs
 
-Requirements :
-- Domain, we will use example.com for this guide.
-- DNS manager, usually it goes with the provider you used for your domain. We will use OVH for the guide. List of compatible [providers](https://doc.traefik.io/traefik/https/acme/#providers).
-- Ports 80 and 443 open, check your firewall.
 
 # Table of Contents
 
@@ -34,6 +30,8 @@ Requirements :
         - [Global redirect to HTTPS](#global-redirect-to-https)
         - [Redirect root to www](#redirect-root-to-www)
 - [Usage](#usage)
+    - [Requirements](#requirements)
+    - [Configuration](#configuration)
 - [Update](#update)
 - [Security](#security)
 - [Backup](#backup)
@@ -56,14 +54,14 @@ Requirements :
 - `.env` - a file containing all the environment variables used in the docker-compose.yml
 - `docker-compose.yml` - a docker-compose file, use to configure your application’s services
 - `letsencrypt/` - a directory used to store the certificates informations
-- `rules/` - a directory used to store traefik optionnal rules (TLS, IP whitelist)
+- `rules/` - a directory used to store traefik optional rules (TLS, IP whitelist)
 - `traefik.yml` - traefik configuration file
 
 Please make sure that all the files and directory are present.
 
 # Informations
 
-Traefik has multiple ways to be configure, I will be using two of them for this guide :
+Traefik has multiple ways to be configured, I will be using two of them for this guide :
 - Configuration file : Such as traefik.yml, tls.yml, ...
 - Labels : Used in a docker-compose file
 
@@ -147,7 +145,7 @@ The docker-compose contains two services :
 
 The socket-proxy service is used to protect the docker socket, allowing Traefik unrestricted access to your Docker socket file could result in a vulnerability to the host computer, as per [Traefik own documentation](https://doc.traefik.io/traefik/providers/docker/#docker-api-access), should any other part of the Traefik container ever be compromised. 
 
-Instead of allowing Traefik container full access to the Docker socket file, we can instead proxy only the API calls we need with [Tecnativa’s Docker Socket Proxy](https://github.com/Tecnativa/docker-socket-proxy), following the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege).
+Instead of allowing Traefik container full access to the Docker socket file, we can instead proxy only the API calls we need with [Tecnativa’s Docker Socket Proxy](https://github.com/Tecnativa/docker-socket-proxy), following the [principle of the least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege).
 
 ## traefik
 
@@ -156,6 +154,7 @@ Instead of allowing Traefik container full access to the Docker socket file, we 
 Traefik can use an ACME provider (like Let's Encrypt) for automatic certificate generation. It will create the certificate and attempt to renew it automatically 30 days before expiration.
 
 For the DNS challenge, you'll need a [working provider](https://doc.traefik.io/traefik/https/acme/#providers) along with the credentials allowing to create and remove DNS records.
+If you are using OVH, you can use this [guide](https://medium.com/nephely/configure-traefik-for-the-dns-01-challenge-with-ovh-as-dns-provider-c737670c0434) to retrieve the credentials.
 
 
 ### Global redirect to HTTPS
@@ -177,13 +176,49 @@ This rule will match all the HTTP requests and redirect them to HTTPS. It uses t
       - "traefik.http.routers.root.middlewares=redirect-root-to-www"
       - "traefik.http.routers.root.tls=true"
 ```
-This rule will automatically redirect the root domain `example.com` to `www.example.com`. You can use the [webserver](../webserver) example to setup a website using docker. 
+This rule will automatically redirect the root domain `example.com` to `www.example.com`. You can use the [webserver](../webserver) example to set up a website using docker. 
 
 # Usage
+
+## Requirements
+- Domain, we will use example.com for this guide.
+- DNS manager, usually it goes with the provider you used for your domain. We will use OVH for the guide. List of compatible [providers](https://doc.traefik.io/traefik/https/acme/#providers).
+- Ports 80 and 443 open, check your firewall.
+
+
+## Configuration
+Before using the docker-compose file, please update the following configurations.
+
+- **change the domain** : The current domain is example.com, change it to your domain <br>
+  ```
+    sed -i -e "s/example/your-domain/g" docker-compose.yml 
+    sed -i -e "s/.com/your-tld/g" docker-compose.yml
+    sed -i -e "s/example.com/your-domain.tld/g" traefik.yml 
+  ```
+- **change the dns provider credentials** : Replace the provider name in `traefik.yml` if you are not using ovh. Replace the environment variables in `.env` and in `docker-compose.yml`<br>
+
+- **update the whitelist (optional)** : Replace the IP address in `rules/whitelist.yml`. Use the IP address as well as the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). Whitelist is disable by default with `0.0.0.0/0`. The whitelist will be used on containers setting the following label. <br>
+  ```
+    # Ip filtering
+    - "traefik.http.routers.bitwarden.middlewares=whitelist@file"
+  ```
+  You can use the IP address of the server hosting your services if you are using [openvpn](../openvpn-pihole). Then your services will only be available through your VPN (recommend for a better security).
 
 
 # Update
 
+Both `traefik` and `socket-proxy` images are automatically updated with [watchtower](../watchtower) thanks to the following label :
+
+```
+      # Watchtower Update
+      - "com.centurylinklabs.watchtower.enable=true"
+```
+
+
 # Security
 
+The socket-proxy service is used to protect the docker socket.
+
 # Backup
+
+Docker volumes are globally backed up using [borg-backup](../borg-backup). 
