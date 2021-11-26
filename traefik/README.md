@@ -22,7 +22,7 @@ Traefik is a key component for this selfhosted infrastructure, it is providing t
 - [About](#about)
 - [Table of Contents](#table-of-contents)
 - [File structure](#file-structure)
-- [Informations](#informations)
+- [Information](#information)
     - [docker-compose](#docker-compose)
     - [socket-proxy](#socket-proxy)
     - [traefik](#traefik)
@@ -53,13 +53,13 @@ Traefik is a key component for this selfhosted infrastructure, it is providing t
 
 - `.env` - a file containing all the environment variables used in the docker-compose.yml
 - `docker-compose.yml` - a docker-compose file, use to configure your application’s services
-- `letsencrypt/` - a directory used to store the certificates informations
+- `letsencrypt/` - a directory used to store the certificates' information
 - `rules/` - a directory used to store traefik optional rules (TLS, IP whitelist)
 - `traefik.yml` - traefik configuration file
 
 Please make sure that all the files and directory are present.
 
-# Informations
+# Information
 
 Traefik has multiple ways to be configured, I will be using two of them for this guide :
 - Configuration file : Such as traefik.yml, tls.yml, ...
