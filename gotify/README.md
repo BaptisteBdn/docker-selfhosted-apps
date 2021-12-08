@@ -1,6 +1,10 @@
 # About
 
+# Table of Contents
+
 # File structure 
+
+# Information
 
 # Usage
 
