@@ -110,12 +110,13 @@ Then, go to IAM, select your backup user and choose `Add permissions` then `Atta
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "VisualEditor0",
+            "Sid": "AllAccess",
+            "Action": "s3:*",
             "Effect": "Allow",
-            "Action": [
-                "s3:*"
-            ],
-            "Resource": "arn:aws:s3:::name-of-your-bucket"
+            "Resource": [
+                "arn:aws:s3:::name-of-your-bucket",
+                "arn:aws:s3:::name-of-your-bucket/*"
+            ]
         }
     ]
 }
