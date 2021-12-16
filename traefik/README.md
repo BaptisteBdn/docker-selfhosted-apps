@@ -57,7 +57,7 @@ Traefik is a key component for this selfhosted infrastructure, it is providing t
 - `rules/` - a directory used to store traefik optional rules (TLS, IP whitelist)
 - `traefik.yml` - traefik configuration file
 
-Please make sure that all the files and directory are present.
+Please make sure that all the files and directories are present.
 
 # Information
 

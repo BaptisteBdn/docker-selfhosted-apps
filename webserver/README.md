@@ -23,7 +23,6 @@ The following example will host a simple Hello World website.
     - [Requirements](#requirements)
     - [Configuration](#configuration)
 - [Update](#update)
-- [Security](#security)
 - [Backup](#backup)
 
 <!-- /TOC -->
@@ -39,6 +38,8 @@ The following example will host a simple Hello World website.
 
 - `docker-compose.yml` - a docker-compose file, use to configure your application’s services
 - `data/` - a directory used to store your website content
+
+Please make sure that all the files and directories are present.
 
 # Information
 

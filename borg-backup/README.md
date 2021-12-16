@@ -50,7 +50,7 @@ The scripts are a modified version of [luispabon/borg-s3-home-backup](https://gi
 - `download-backup-s3.sh`- a script to download your data from the cloud
 - `excludes.txt` - an exclude file, default will back up all your docker infrastructure 
 
-Please make sure that all the files and directory are present.
+Please make sure that all the files and directories are present.
 
 # Information
 

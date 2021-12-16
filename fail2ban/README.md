@@ -22,6 +22,7 @@ There are a lot of fail2ban configurations availabe on the internet, and you can
     - [docker-compose](#docker-compose)
     - [jails](#jails)
 - [Usage](#usage)
+    - [Configuration](#configuration)
 - [Update](#update)
 - [Security](#security)
 - [Backup](#backup)
@@ -50,7 +51,7 @@ There are a lot of fail2ban configurations availabe on the internet, and you can
 - `data/jail.d` - a directory containing custom jail configuration for your services
 - `docker-compose.yml` - a docker-compose file, use to configure your application’s services
 
-Please make sure that all the files and directory are present.
+Please make sure that all the files and directories are present.
 
 
 # Information
@@ -106,6 +107,8 @@ ignoreregex =
 This filter is using regex and will match any log that fails to connect to your vaultwarden vault. The log file that is parsed is `/var/log/syslog`, redirection is provided with the docker-compose available in the [vaultwarden guide](../vaultwarden).
 
 # Usage
+
+## Configuration
 
 No specific configuration is required, just run :
 
