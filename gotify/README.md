@@ -1,7 +1,7 @@
 # About
 
 <p align="center">
-<img src="../_utilities/gotify.png" alt="gotify" title="gotify" />
+<img src="../_utilities/gotify.png" width="400" alt="gotify" title="gotify" />
 </p>
 
 Gotify is a simple server for sending and receiving notification messages. It is used a lot throughout this guide for services such as backups and automatic updates, a must-have self-hosted solution.

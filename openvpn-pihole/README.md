@@ -15,6 +15,24 @@ This guide combine both services so that every device that are connected to the 
 
 # Table of Contents
 
+<!-- TOC -->
+
+- [About](#about)
+- [Table of Contents](#table-of-contents)
+- [File structure](#file-structure)
+- [Information](#information)
+    - [docker-compose](#docker-compose)
+- [Usage](#usage)
+    - [Requirements](#requirements)
+    - [Configuration](#configuration)
+    - [Pihole](#pihole)
+    - [OpenVPN](#openvpn)
+- [Update](#update)
+- [Security](#security)
+- [Backup](#backup)
+
+<!-- /TOC -->
+
 # File structure 
 
 ```
