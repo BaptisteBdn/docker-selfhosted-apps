@@ -6,6 +6,10 @@
 
 The Apache HTTP Server Project is a collaborative software development effort aimed at creating a robust, commercial-grade, featureful, and freely-available source code implementation of an HTTP (Web) server. 
 
+* [Github](https://github.com/apache/httpd)
+* [Documentation](https://httpd.apache.org/docs/current/)
+* [Docker Image](https://hub.docker.com/_/httpd)
+
 Use this service in combination with Traefik to host any custom-made website you want. Portofolio, resume, blog, ...
 
 The following example will host a simple Hello World website.

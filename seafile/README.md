@@ -6,6 +6,10 @@
 
 Seafile is an open-source, cross-platform file-hosting software system. Files are stored on a central server and can be synchronized with personal computers and mobile devices through apps or through the web interface.
 
+* [Github](https://github.com/haiwen/seafile)
+* [Documentation](https://manual.seafile.com/docker/deploy_seafile_with_docker/)
+* [Docker Image](https://hub.docker.com/r/seafileltd/seafile-mc)
+
 # Table of Contents
 
 <!-- TOC -->

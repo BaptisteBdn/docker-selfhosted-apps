@@ -6,9 +6,29 @@
 
 Vaultwarden is an alternative implementation of the Bitwarden server API written in Rust and compatible with upstream Bitwarden clients, it is perfect for self-hosted deployment where running the official resource-heavy service might not be ideal.
 
+* [Github](https://github.com/dani-garcia/vaultwarden)
+* [Documentation](https://github.com/dani-garcia/vaultwarden/wiki)
+* [Docker Image](https://hub.docker.com/r/vaultwarden/server)
+
 Bitwarden is a free and open-source password management service that stores sensitive information such as website credentials in an encrypted vault.
 
 # Table of Contents
+
+<!-- TOC -->
+
+- [About](#about)
+- [Table of Contents](#table-of-contents)
+- [File structure](#file-structure)
+- [Information](#information)
+    - [docker-compose](#docker-compose)
+- [Usage](#usage)
+    - [Requirements](#requirements)
+    - [Configuration](#configuration)
+- [Update](#update)
+- [Security](#security)
+- [Backup](#backup)
+
+<!-- /TOC -->
 
 # File structure 
 

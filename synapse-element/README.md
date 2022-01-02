@@ -12,6 +12,15 @@ Synapse is a Matrix "homeserver" implementation developed by the matrix.org core
 
 Element is a Matrix web client built using the Matrix React SDK.
 
+* Synapse
+  * [Github](https://github.com/matrix-org/synapse)
+  * [Documentation](https://matrix-org.github.io/synapse/latest/)
+  * [Docker Image](https://hub.docker.com/r/matrixdotorg/synapse)
+
+* Element
+  * [Github](https://github.com/vector-im/element-web)
+  * [Docker Image](https://hub.docker.com/r/vectorim/element-web)
+
 # Table of Contents
 
 <!-- TOC -->

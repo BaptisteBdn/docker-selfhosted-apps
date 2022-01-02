@@ -6,8 +6,26 @@
 
 Watchtower is a container-based solution for automating Docker container base image updates. It will pull down your new image, gracefully shut down your existing container and restart it with the same options that were used when it was deployed initially.
 
+* [Github](https://github.com/containrrr/watchtower)
+* [Documentation](https://containrrr.dev/watchtower/)
+* [Docker Image](https://hub.docker.com/r/containrrr/watchtower)
 
 # Table of Contents
+
+<!-- TOC -->
+
+- [About](#about)
+- [Table of Contents](#table-of-contents)
+- [File structure](#file-structure)
+- [Information](#information)
+    - [docker-compose](#docker-compose)
+- [Usage](#usage)
+    - [Configuration](#configuration)
+- [Update](#update)
+- [Security](#security)
+- [Backup](#backup)
+
+<!-- /TOC -->
 
 # File structure 
 

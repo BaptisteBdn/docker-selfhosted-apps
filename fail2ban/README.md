@@ -5,6 +5,11 @@
 </p>
 
 Fail2ban scans log files and bans IPs that show the malicious signs.
+
+* [Github](https://github.com/fail2ban/fail2ban)
+* [Documentation](http://www.fail2ban.org/wiki/index.php/Fail2Ban)
+* [Docker Image](https://github.com/crazy-max/docker-fail2ban)
+
 We are going to be using a prebuilt docker image by crazymax to facilitate the process.
 There are a lot of fail2ban configurations availabe on the internet, and you can even create your own, this guide provides the following features :
 

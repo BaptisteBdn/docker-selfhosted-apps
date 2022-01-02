@@ -2,7 +2,7 @@ version: "3"
 
 services:
   bitwardenrs:
-    image: bitwardenrs/server
+    image: vaultwarden/server
     container_name: bitwardenrs
     restart: unless-stopped
     volumes:

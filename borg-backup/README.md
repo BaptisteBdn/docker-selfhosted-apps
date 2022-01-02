@@ -5,6 +5,10 @@
 </p>
 
 BorgBackup is a deduplicating backup program, it supports compression and authenticated encryption.
+
+* [Github](https://github.com/borgbackup/borg)
+* [Documentation](https://borgbackup.readthedocs.io/en/stable/)
+
 Borg is a key element for this selfhosted infrastructure as it will back up all your valuable data, the scripts alongside borg provides the following features :
 
 - Local backup of your docker repository

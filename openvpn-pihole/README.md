@@ -10,6 +10,16 @@
 OpenVPN is a virtual private network (VPN), it provides you a secure, encrypted tunnel for online traffic and allow you to manage a remote private network.
 Pihole is a DNS sinkhole that protects your devices from unwanted content without installing any client-side software.
 
+* OpenVPN
+  * [Github](https://github.com/OpenVPN/openvpn)
+  * [Documentation](https://openvpn.net/community-resources/management-interface/)
+  * [Docker Image](https://hub.docker.com/r/kylemanna/openvpn/)
+
+* Pi-Hole
+  * [Github](https://github.com/pi-hole/pi-hole)
+  * [Documentation](https://docs.pi-hole.net/)
+  * [Docker Image](https://hub.docker.com/r/pihole/pihole)
+
 This guide combine both services so that every device that are connected to the VPN also pass through pihole. Having a VPN will also reinforce security for your overall infrastructure as you can combine it with [traefik IP whitelist](../traefik#Configuration).
 
 
