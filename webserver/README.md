@@ -20,7 +20,7 @@ The following example will host a simple Hello World website.
 
 - [About](#about)
 - [Table of Contents](#table-of-contents)
-- [File structure](#file-structure)
+- [Files structure](#files-structure)
 - [Information](#information)
     - [docker-compose](#docker-compose)
 - [Usage](#usage)
@@ -31,7 +31,7 @@ The following example will host a simple Hello World website.
 
 <!-- /TOC -->
 
-# File structure 
+# Files structure 
 
 ```
 .

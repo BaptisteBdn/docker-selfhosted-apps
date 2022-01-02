@@ -25,7 +25,7 @@ The scripts are a modified version of [luispabon/borg-s3-home-backup](https://gi
 
 - [About](#about)
 - [Table of Contents](#table-of-contents)
-- [File structure](#file-structure)
+- [Files structure](#files-structure)
 - [Information](#information)
     - [env](#env)
         - [borg](#borg)
@@ -40,7 +40,7 @@ The scripts are a modified version of [luispabon/borg-s3-home-backup](https://gi
 
 <!-- /TOC -->
 
-# File structure 
+# Files structure 
 
 ```
 .

@@ -30,7 +30,7 @@ Bitwarden is a free and open-source password management service that stores sens
 
 <!-- /TOC -->
 
-# File structure 
+# Files structure 
 
 ```
 .

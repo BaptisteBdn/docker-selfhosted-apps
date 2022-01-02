@@ -43,7 +43,7 @@ This guide combine both services so that every device that are connected to the 
 
 <!-- /TOC -->
 
-# File structure 
+# Files structure 
 
 ```
 .

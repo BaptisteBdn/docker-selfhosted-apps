@@ -27,7 +27,7 @@ Watchtower is a container-based solution for automating Docker container base im
 
 <!-- /TOC -->
 
-# File structure 
+# Files structure 
 
 ```
 .

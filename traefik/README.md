@@ -25,7 +25,7 @@ Traefik is a key component for this selfhosted infrastructure, it is providing t
 
 - [About](#about)
 - [Table of Contents](#table-of-contents)
-- [File structure](#file-structure)
+- [Files structure](#files-structure)
 - [Information](#information)
     - [docker-compose](#docker-compose)
     - [socket-proxy](#socket-proxy)
@@ -42,7 +42,7 @@ Traefik is a key component for this selfhosted infrastructure, it is providing t
 
 <!-- /TOC -->
 
-# File structure 
+# Files structure 
 
 ```
 .
@@ -185,7 +185,7 @@ This rule will automatically redirect the root domain `example.com` to `www.exam
 # Usage
 
 ## Requirements
-- Domain, we will use example.com for this guide.
+- A domain, we will use example.com for this guide.
 - DNS manager, usually it goes with the provider you used for your domain. We will use OVH for the guide. List of compatible [providers](https://doc.traefik.io/traefik/https/acme/#providers).
 - Ports 80 and 443 open, check your firewall.
 

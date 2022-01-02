@@ -28,7 +28,7 @@ Seafile is an open-source, cross-platform file-hosting software system. Files ar
 
 <!-- /TOC -->
 
-# File structure 
+# Files structure 
 
 ```
 .

@@ -40,7 +40,7 @@ Element is a Matrix web client built using the Matrix React SDK.
 <!-- /TOC -->
 
 
-# File structure 
+# Files structure 
 
 ```
 .

@@ -34,7 +34,7 @@ There are a lot of fail2ban configurations availabe on the internet, and you can
 
 <!-- /TOC -->
 
-# File structure 
+# Files structure 
 ```
 .
 |-- data/

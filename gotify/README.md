@@ -28,7 +28,7 @@ Gotify is a simple server for sending and receiving notification messages. It is
 
 <!-- /TOC -->
 
-# File structure 
+# Files structure 
 
 ```
 .
