@@ -11,7 +11,7 @@ services:
       - proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.webserver.rule=Host(`www.example.com`)"
+      - "traefik.http.routers.webserver.rule=Host(`${TRAEFIK_WEBSERVER}`)"
       - "traefik.http.routers.webserver.entrypoints=https"
       - "traefik.http.routers.webserver.tls=true"
       - "traefik.http.routers.webserver.tls.certresolver=mydnschallenge"

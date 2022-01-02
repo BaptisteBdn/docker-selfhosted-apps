@@ -49,7 +49,7 @@ services:
       - memcached
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.seafile.rule=Host(`seafile.example.com`)"
+      - "traefik.http.routers.seafile.rule=Host(`${TRAEFIK_SEAFILE}`)"
       - "traefik.http.routers.seafile.entrypoints=https"
       - "traefik.http.routers.seafile.tls=true"
       - "traefik.http.routers.seafile.tls.certresolver=mydnschallenge"

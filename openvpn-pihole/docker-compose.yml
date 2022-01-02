@@ -45,7 +45,7 @@ services:
        proxy:
      labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.pihole.rule=Host(`pihole.example.com`)"
+      - "traefik.http.routers.pihole.rule=Host(`${TRAEFIK_PIHOLE}`)"
       - "traefik.http.routers.pihole.entrypoints=https"
       - "traefik.http.routers.pihole.tls=true"
       - "traefik.http.routers.pihole.tls.certresolver=mydnschallenge"

@@ -14,6 +14,23 @@ Element is a Matrix web client built using the Matrix React SDK.
 
 # Table of Contents
 
+<!-- TOC -->
+
+- [About](#about)
+- [Table of Contents](#table-of-contents)
+- [File structure](#file-structure)
+- [Information](#information)
+    - [docker-compose](#docker-compose)
+- [Usage](#usage)
+    - [Requirements](#requirements)
+    - [Configuration](#configuration)
+- [Update](#update)
+- [Security](#security)
+- [Backup](#backup)
+
+<!-- /TOC -->
+
+
 # File structure 
 
 ```

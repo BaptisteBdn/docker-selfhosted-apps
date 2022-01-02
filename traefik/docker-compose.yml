@@ -34,14 +34,14 @@ services:
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
 
       # redirect root to www
-      - "traefik.http.routers.root.rule=host(`example.com`)"
+      - "traefik.http.routers.root.rule=host(`${DOMAIN}.${TLD}`)"
       - "traefik.http.routers.root.entrypoints=https"
       - "traefik.http.routers.root.middlewares=redirect-root-to-www"
       - "traefik.http.routers.root.tls=true"
 
       # middleware redirect root to www
-      - "traefik.http.middlewares.redirect-root-to-www.redirectregex.regex=^https://example\\.com/(.*)"
-      - "traefik.http.middlewares.redirect-root-to-www.redirectregex.replacement=https://www.example.com/$${1}"
+      - "traefik.http.middlewares.redirect-root-to-www.redirectregex.regex=^https://${DOMAIN}\\.${TLD}/(.*)"
+      - "traefik.http.middlewares.redirect-root-to-www.redirectregex.replacement=https://www.${DOMAIN}.${TLD}/$${1}"
 
       # Watchtower Update
       - "com.centurylinklabs.watchtower.enable=true"

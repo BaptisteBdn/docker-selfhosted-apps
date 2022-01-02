@@ -13,7 +13,7 @@ services:
       - proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.gotify.rule=Host(`gotify.example.com`)"
+      - "traefik.http.routers.gotify.rule=Host(`${TRAEFIK_GOTIFY}`)"
       - "traefik.http.routers.gotify.entrypoints=https"
       - "traefik.http.routers.gotify.tls=true"
       - "traefik.http.routers.gotify.tls.certresolver=mydnschallenge"

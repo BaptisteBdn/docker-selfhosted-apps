@@ -17,7 +17,7 @@ services:
       - proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.bitwarden.rule=Host(`bitwarden.example.com`)"
+      - "traefik.http.routers.bitwarden.rule=Host(`${TRAEFIK_BITWARDEN}`)"
       - "traefik.http.routers.bitwarden.entrypoints=https"
       - "traefik.http.routers.bitwarden.tls=true"
       - "traefik.http.routers.bitwarden.tls.certresolver=mydnschallenge"

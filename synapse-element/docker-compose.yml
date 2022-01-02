@@ -12,7 +12,7 @@ services:
       - ./matrix-data:/data
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.synapse.rule=Host(`matrix.example.com`)"
+      - "traefik.http.routers.synapse.rule=Host(`${TRAEFIK_MATRIX}`)"
       - "traefik.http.routers.synapse.entrypoints=https"
       - "traefik.http.routers.synapse.tls=true"
       - "traefik.http.routers.synapse.tls.certresolver=mydnschallenge"
@@ -32,7 +32,7 @@ services:
       - ./element-web/config.json:/app/config.json:ro
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.element.rule=Host(`chat.example.com`)"
+      - "traefik.http.routers.element.rule=Host(`${TRAEFIK_ELEMENT}`)"
       - "traefik.http.routers.element.entrypoints=https"
       - "traefik.http.routers.element.tls=true"
       - "traefik.http.routers.element.tls.certresolver=mydnschallenge"
