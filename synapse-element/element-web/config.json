@@ -1,0 +1,30 @@
+{
+    "default_server_config": {
+        "m.homeserver": {
+            "base_url": "https://matrix.example.com",
+            "server_name": "example.com"
+        },
+        "m.identity_server": {
+            "base_url": "https://vector.im"
+        }
+    },
+    "disable_custom_urls": false,
+    "disable_guests": false,
+    "disable_login_language_selector": false,
+    "disable_3pid_login": false,
+    "brand": "2li Matrix",
+    "integrations_ui_url": "https://scalar.vector.im/",
+    "integrations_rest_url": "https://scalar.vector.im/api",
+    "integrations_jitsi_widget_url": "https://scalar.vector.im/api/widgets/jitsi.html",
+    "bug_report_endpoint_url": "https://riot.im/bugreports/submit",
+    "defaultCountryCode": "GB",
+    "showLabsSettings": false,
+    "features": {
+        "feature_pinning": "labs",
+        "feature_custom_status": "labs",
+        "feature_custom_tags": "labs",
+        "feature_state_counters": "labs"
+    },
+    "default_federate": true,
+    "default_theme": "light"
+}
