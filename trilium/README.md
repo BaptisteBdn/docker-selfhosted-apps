@@ -73,7 +73,7 @@ networks:
     external: true
 ```
 
-The docker-compose contains only one service using the apache trilium image.
+The docker-compose contains only one service using the trilium image.
 
 # Usage
 
