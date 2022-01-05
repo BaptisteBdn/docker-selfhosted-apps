@@ -11,23 +11,20 @@ Trilium Notes is a hierarchical note taking application with focus on building l
 * [Docker Image](https://hub.docker.com/r/zadam/trilium)
 
 # Table of Contents
+
 <!-- TOC -->
 
 - [About](#about)
 - [Table of Contents](#table-of-contents)
-- [Files structure](#files-structure)
 - [Information](#information)
-  - [1. <a name='docker-compose'></a>docker-compose](#1-docker-compose)
+  - [docker-compose](#docker-compose)
 - [Usage](#usage)
-  - [2. <a name='Requirements'></a>Requirements](#2-requirements)
-  - [3. <a name='Configuration'></a>Configuration](#3-configuration)
+  - [Requirements](#requirements)
+  - [Configuration](#configuration)
 - [Update](#update)
 - [Backup](#backup)
 
 <!-- /TOC -->
-
-
-# Files structure 
 
 ```text
 .
@@ -44,7 +41,7 @@ Please make sure that all the files and directories are present.
 
 # Information
 
-##  1. <a name='docker-compose'></a>docker-compose
+##  docker-compose
 
 Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
 
@@ -80,13 +77,13 @@ The docker-compose contains only one service using the apache trilium image.
 
 # Usage
 
-##  2. <a name='Requirements'></a>Requirements
+## Requirements
 
 * [Traefik up and running](../traefik).
 * A subdomain of your choice, this example uses `trilium`.
   * You should be able to create a subdomain with your DNS provider, use a `A record` with the same IP address as your root domain.
 
-##  3. <a name='Configuration'></a>Configuration
+## Configuration
 
 Before using the docker-compose file, please update the following configurations.
 
