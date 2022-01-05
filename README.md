@@ -9,6 +9,7 @@ Guide with example !
 * [traefik](traefik/) - reverse proxy and SSL manager
 * [borg-backup](borg-backup/) - backup scripts (local and AWS)
 * [fail2ban](fail2ban/) - security tool (ban IP)
+* [freshrss](freshrss/) - RSS feed aggregator
 * [gotify](gotify/) - notification service
 * [openvpn-pihole](openvpn-pihole/) - VPN with pihole (DNS sinkhole)
 * [seafile](seafile/) - file-hosting software system
