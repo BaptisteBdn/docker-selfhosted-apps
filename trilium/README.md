@@ -4,7 +4,7 @@
 <img src="../_utilities/trilium.png" alt="trilium" title="trilium" />
 </p>
 
-Trilium Notes is a hierarchical note taking application with focus on building large personal knowledge bases
+Trilium Notes is a hierarchical note-taking application with focus on building large personal knowledge bases
 
 * [Github](https://github.com/zadam/trilium)
 * [Documentation](https://github.com/zadam/trilium/wiki/)
@@ -17,10 +17,10 @@ Trilium Notes is a hierarchical note taking application with focus on building l
 - [About](#about)
 - [Table of Contents](#table-of-contents)
 - [Information](#information)
-  - [docker-compose](#docker-compose)
+    - [docker-compose](#docker-compose)
 - [Usage](#usage)
-  - [Requirements](#requirements)
-  - [Configuration](#configuration)
+    - [Requirements](#requirements)
+    - [Configuration](#configuration)
 - [Update](#update)
 - [Backup](#backup)
 

@@ -16,7 +16,7 @@ Seafile is an open-source, cross-platform file-hosting software system. Files ar
 
 - [About](#about)
 - [Table of Contents](#table-of-contents)
-- [File structure](#file-structure)
+- [Files structure](#files-structure)
 - [Information](#information)
     - [docker-compose](#docker-compose)
 - [Usage](#usage)
@@ -30,7 +30,7 @@ Seafile is an open-source, cross-platform file-hosting software system. Files ar
 
 # Files structure 
 
-```
+```bash
 .
 |-- .env
 |-- docker-compose.yml
@@ -50,7 +50,7 @@ Please make sure that all the files and directories are present.
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
 
-```
+```yaml
 version: '3'
 
 services:
@@ -130,7 +130,7 @@ networks:
 
 Replace the environment variables in `.env` with your own, then run :
 
-```
+```bash
 sudo docker-compose up -d
 ```
 
@@ -140,7 +140,7 @@ You should then be able to access the seafile web-ui with the SEAFILE_ADMIN_EMAI
 
 The image is automatically updated with [watchtower](../watchtower) thanks to the following label :
 
-```
+```yaml
       # Watchtower Update
       - "com.centurylinklabs.watchtower.enable=true"
 ```

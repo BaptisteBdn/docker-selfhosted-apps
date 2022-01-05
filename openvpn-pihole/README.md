@@ -29,7 +29,7 @@ This guide combine both services so that every device that are connected to the 
 
 - [About](#about)
 - [Table of Contents](#table-of-contents)
-- [File structure](#file-structure)
+- [Files structure](#files-structure)
 - [Information](#information)
     - [docker-compose](#docker-compose)
 - [Usage](#usage)
@@ -45,7 +45,7 @@ This guide combine both services so that every device that are connected to the 
 
 # Files structure 
 
-```
+```bash
 .
 |-- docker-compose.yml
 |-- etc-dnsmasq.d/
@@ -66,7 +66,7 @@ Please make sure that all the files and directories are present.
 ## docker-compose
 Link to the following [docker-compose.yml](docker-compose.yml).
 
-```
+```yaml
 version: '3'
 
 services:
@@ -145,7 +145,7 @@ networks:
 
 No specific configuration is required, just run :
 
-```
+```bash
 sudo docker-compose up -d
 ```
 
@@ -195,7 +195,7 @@ For more information, check the openvpn docker [documentation](https://github.co
 
 The image is automatically updated with [watchtower](../watchtower) thanks to the following label :
 
-```
+```yaml
       # Watchtower Update
       - "com.centurylinklabs.watchtower.enable=true"
 ```

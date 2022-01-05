@@ -16,7 +16,7 @@ Watchtower is a container-based solution for automating Docker container base im
 
 - [About](#about)
 - [Table of Contents](#table-of-contents)
-- [File structure](#file-structure)
+- [Files structure](#files-structure)
 - [Information](#information)
     - [docker-compose](#docker-compose)
 - [Usage](#usage)
@@ -29,7 +29,7 @@ Watchtower is a container-based solution for automating Docker container base im
 
 # Files structure 
 
-```
+```bash
 .
 |-- .env
 `-- docker-compose.yml
@@ -49,7 +49,7 @@ Watchtower if configured to automatically upgrade your images and to then, send 
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
 
-```
+```yaml
 version: "3"
 
 services:
@@ -77,7 +77,7 @@ services:
 
 Replace the environment variables in `.env` with your own, then run :
 
-```
+```bash
 sudo docker-compose up -d
 ```
 
@@ -87,7 +87,7 @@ Watchtower will then check for update every monday and send you a notification w
 
 The image is automatically updated with [watchtower](../watchtower) thanks to the following label :
 
-```
+```yaml
       # Watchtower Update
       - "com.centurylinklabs.watchtower.enable=true"
 ```

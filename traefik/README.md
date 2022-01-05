@@ -44,7 +44,7 @@ Traefik is a key component for this selfhosted infrastructure, it is providing t
 
 # Files structure 
 
-```
+```bash
 .
 |-- .env
 |-- docker-compose.yml
@@ -73,7 +73,7 @@ The configuration could be done using only one of the two method, but I find it 
 
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
-```
+```yaml
 version: "3"
 
 services:
@@ -163,7 +163,7 @@ If you are using OVH, you can use this [guide](https://medium.com/nephely/config
 
 ### Global redirect to HTTPS
 
-```
+```yaml
       # global redirect to https
       - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
       - "traefik.http.routers.http-catchall.entrypoints=http"
@@ -173,7 +173,7 @@ This rule will match all the HTTP requests and redirect them to HTTPS. It uses t
 
 ### Redirect root to www
 
-```
+```yaml
       # redirect root to www
       - "traefik.http.routers.root.rule=host(`example.com`)"
       - "traefik.http.routers.root.entrypoints=https"
@@ -194,7 +194,7 @@ This rule will automatically redirect the root domain `example.com` to `www.exam
 Before using the docker-compose file, please update the following configurations.
 
 - **change the domain** : The current domain is example.com, change it to your domain <br>
-  ```
+  ```bash
     sed -i -e "s/example/your-domain/g" docker-compose.yml 
     sed -i -e "s/.com/your-tld/g" docker-compose.yml
     sed -i -e "s/example.com/your-domain.tld/g" traefik.yml 
@@ -202,7 +202,7 @@ Before using the docker-compose file, please update the following configurations
 - **change the dns provider credentials** : Replace the provider name in `traefik.yml` if you are not using ovh. Replace the environment variables in `.env` and in `docker-compose.yml`<br>
 
 - **update the whitelist (optional)** : Replace the IP address in `rules/whitelist.yml`. Use the IP address as well as the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). Whitelist is disable by default with `0.0.0.0/0`. The whitelist will be used on containers setting the following label. <br>
-  ```
+  ```yaml
     # Ip filtering
     - "traefik.http.routers.bitwarden.middlewares=whitelist@file"
   ```
@@ -213,7 +213,7 @@ Before using the docker-compose file, please update the following configurations
 
 Both `traefik` and `socket-proxy` images are automatically updated with [watchtower](../watchtower) thanks to the following label :
 
-```
+```yaml
       # Watchtower Update
       - "com.centurylinklabs.watchtower.enable=true"
 ```

@@ -35,7 +35,7 @@ There are a lot of fail2ban configurations availabe on the internet, and you can
 <!-- /TOC -->
 
 # Files structure 
-```
+```bash
 .
 |-- data/
 |   |-- action.d/
@@ -64,7 +64,7 @@ Please make sure that all the files and directories are present.
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml).
 
-```
+```yaml
 version: '3'
 
 services:
@@ -117,7 +117,7 @@ This filter is using regex and will match any log that fails to connect to your 
 
 No specific configuration is required, just run :
 
-```
+```bash
 sudo docker-compose up -d
 ```
 
@@ -125,7 +125,7 @@ sudo docker-compose up -d
 
 The image is automatically updated with [watchtower](../watchtower) thanks to the following label :
 
-```
+```yaml
       # Watchtower Update
       - "com.centurylinklabs.watchtower.enable=true"
 ```

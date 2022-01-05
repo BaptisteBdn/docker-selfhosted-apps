@@ -27,7 +27,7 @@ Element is a Matrix web client built using the Matrix React SDK.
 
 - [About](#about)
 - [Table of Contents](#table-of-contents)
-- [File structure](#file-structure)
+- [Files structure](#files-structure)
 - [Information](#information)
     - [docker-compose](#docker-compose)
 - [Usage](#usage)
@@ -42,7 +42,7 @@ Element is a Matrix web client built using the Matrix React SDK.
 
 # Files structure 
 
-```
+```bash
 .
 |-- docker-compose.yml
 |-- matrix-data/
@@ -60,7 +60,7 @@ Please make sure that all the files and directories are present.
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml).
 
-```
+```yaml
 version: '3'
 
 services:
@@ -122,7 +122,7 @@ networks:
 
 Check that the URL is correct in `element-web/config.json`, then run :
 
-```
+```bash
 sudo docker-compose up -d
 ```
 
@@ -132,7 +132,7 @@ You should then be able to access the element web-ui and create a new account.
 
 The image is automatically updated with [watchtower](../watchtower) thanks to the following label :
 
-```
+```yaml
       # Watchtower Update
       - "com.centurylinklabs.watchtower.enable=true"
 ```

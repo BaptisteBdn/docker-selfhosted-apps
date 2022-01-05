@@ -42,7 +42,7 @@ The scripts are a modified version of [luispabon/borg-s3-home-backup](https://gi
 
 # Files structure 
 
-```
+```bash
 .
 |-- .env
 |-- backup-borg-s3.sh*
@@ -65,14 +65,14 @@ Links to the following [.env](.env).
 
 ### borg
 
-```
+```bash
 # Directory to back up
 DOCKER_DIR=/path/to/docker_directory
 ```
 The directory containing all the configuration of the docker containers, usually the directory you cloned this guide into.
 
 
-```
+```bash
 # Borg repository
 BORG_REPO=/path/to/borg_repository
 BORG_PASSPHRASE=borg_passphrase
@@ -81,7 +81,7 @@ The borg repository where the backups will be located, and the corresponding pas
 
 To create the repository and set your passphrase :
 
-```
+```bash
 borg init --encryption=repokey /path/to/repo
 ```
 
@@ -91,7 +91,7 @@ borg init --encryption=repokey /path/to/repo
 
 > Keep in mind that AWS S3 is not free. Currently, with approximatly 50 GB of data it costs me around $1 per month.
 
-```
+```bash
 # AWS configuration
 BORG_S3_BACKUP_BUCKET=bucket_name
 BORG_S3_BACKUP_AWS_PROFILE=aws_backup_profile
@@ -109,7 +109,7 @@ Next, create your S3 bucket, keep in mind that the name of the bucket must be un
 Then, go to IAM, select your backup user and choose `Add permissions` then `Attach existing policies` and then `Create policy`. On the editor, choose JSON and set the following policy for your backup user while changing with the name of the bucket you just created.
 
 `S3-full-access-backup-bucket`
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -136,7 +136,7 @@ The AWS configuration is finished, add the bucket name and the name of your aws 
 
 To check that everything is set up correctly, use the following command (as root if you plan to run the backup as root):
 
-```
+```bash
 aws s3 ls --profile=your-profile-name --summarize --recursive s3://name-of-your-bucket
 ```
 
@@ -180,13 +180,13 @@ Add any **full path** to any directory or file that you want to exclude to `excl
 
 Now that everything is set up, you can run the backup script.
 
-```
+```bash
 /bin/bash /path/to/backup-borg-s3.sh >> /var/log/backup.log
 ```
 
 You can also use cron to automate the backup.
 
-```
+```bash
 1 3 * * 1 root /bin/bash /path/to/backup-borg-s3.sh >> /var/log/backup.log
 ```
 This will run the backup script as root every monday at 3.
@@ -197,25 +197,25 @@ If you ever need your backup, borg makes it pretty easy.
 
 First, download the backup using the download backup script, you will need the `.env` with only the AWS settings (aws bucket name and AWS profile name).
 
-```
+```bash
 /bin/bash /download-backup-s3.sh /tmp/aws-backup
 ```
 
 List the backups available (you will need your passphrase).
 
-```
+```bash
 borg list /tmp/aws-backup
 ```
 
 Then create and move to the folder you want to extract your backup in.
 
-```
+```bash
 mkdir /tmp/extracted-backup && cd /tmp/extracted-backup
 ```
 
 Finally, extract the backup you need (it will extract in the directory you are located in).
 
-```
+```bash
 borg extract /tmp/aws-backup::backup-2021-12-06T03.01
 ```
 

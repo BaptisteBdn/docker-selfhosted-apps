@@ -33,7 +33,7 @@ The following example will host a simple Hello World website.
 
 # Files structure 
 
-```
+```bash
 .
 |-- data/
 |   `-- index.html
@@ -51,7 +51,7 @@ In this example, the website will only display a Hello World as you can see in t
 
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml).
-```
+```yaml
 version: '3'
 
 services:
@@ -91,7 +91,7 @@ The docker-compose contains only one service using the apache httpd image.
 Before using the docker-compose file, please update the following configurations.
 
 - **change the domain** : The current domain is example.com, change it to your domain <br>
-  ```
+  ```bash
     sed -i -e "s/www.example.com/www.your-domain.com/g" docker-compose.yml 
   ```
 
@@ -101,7 +101,7 @@ Before using the docker-compose file, please update the following configurations
 
 The image is automatically updated with [watchtower](../watchtower) thanks to the following label :
 
-```
+```yaml
       # Watchtower Update
       - "com.centurylinklabs.watchtower.enable=true"
 ```
