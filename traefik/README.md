@@ -193,10 +193,8 @@ This rule will automatically redirect the root domain `example.com` to `www.exam
 ## Configuration
 Before using the docker-compose file, please update the following configurations.
 
-- **change the domain** : The current domain is example.com, change it to your domain <br>
+- **change the domain** : The current domain is example.com, change it to your domain. The change need to be made in `.env` and `traefik.yml` <br>
   ```bash
-    sed -i -e "s/example/your-domain/g" docker-compose.yml 
-    sed -i -e "s/.com/your-tld/g" docker-compose.yml
     sed -i -e "s/example.com/your-domain.tld/g" traefik.yml 
   ```
 - **change the dns provider credentials** : Replace the provider name in `traefik.yml` if you are not using ovh. Replace the environment variables in `.env` and in `docker-compose.yml`<br>
