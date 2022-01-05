@@ -1,14 +1,14 @@
 # About
 
 <p align="center">
-<img src="../_utilities/trilium.png" alt="trilium" title="trilium" />
+<img src="../_utilities/freshrss.png" alt="freshrss" title="freshrss" />
 </p>
 
-Trilium Notes is a hierarchical note-taking application with focus on building large personal knowledge bases
+FreshRSS is a self-hosted RSS feed aggregator
 
-* [Github](https://github.com/zadam/trilium)
-* [Documentation](https://github.com/zadam/trilium/wiki/)
-* [Docker Image](https://hub.docker.com/r/zadam/trilium)
+* [Github](https://github.com/FreshRSS/FreshRSS)
+* [Documentation](https://freshrss.github.io/FreshRSS/en/admins/01_Index.html)
+* [Docker Image](https://hub.docker.com/r/linuxserver/freshrss)
 
 # Table of Contents
 
@@ -49,19 +49,20 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
 version: '3'
 
 services:
- trilium:
-    image: 'zadam/trilium:latest'
-    container_name: trilium
+ freshrss:
+    image: 'freshrss/freshrss'
+    container_name: freshrss
     restart: unless-stopped
     volumes:
-      - "./data:/data"
+      - "./data:/var/www/FreshRSS/data"
     environment:
-      - TRILIUM_DATA_DIR=${TRILIUM_DATA_DIR}
+      - 'CRON_MIN=4,34'
+      - 'TZ=Europe/Paris'
     networks:
       - proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.webserver.rule=Host(`${TRAEFIK_TRILIUM}`)"
+      - "traefik.http.routers.webserver.rule=Host(`${TRAEFIK_FRESHRSS}`)"
       - "traefik.http.routers.webserver.entrypoints=https"
       - "traefik.http.routers.webserver.tls=true"
       - "traefik.http.routers.webserver.tls.certresolver=mydnschallenge"
@@ -73,14 +74,14 @@ networks:
     external: true
 ```
 
-The docker-compose contains only one service using the trilium image.
+The docker-compose contains only one service using the freshrss image.
 
 # Usage
 
 ## Requirements
 
 * [Traefik up and running](../traefik).
-* A subdomain of your choice, this example uses `trilium`.
+* A subdomain of your choice, this example uses `freshrss`.
   * You should be able to create a subdomain with your DNS provider, use a `A record` with the same IP address as your root domain.
 
 ## Configuration
@@ -90,7 +91,7 @@ Before using the docker-compose file, please update the following configurations
 * **change the domain** : The current domain is example.com, change it to your domain
   
   ```bash
-    sed -i -e "s/trilium.example.com/trilium.your-domain.com/g" docker-compose.yml 
+    sed -i -e "s/freshrss.example.com/freshrss.your-domain.com/g" docker-compose.yml 
   ```
 
 # Update
