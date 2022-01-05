@@ -35,7 +35,7 @@ Trilium Notes is a hierarchical note taking application with focus on building l
 
 * `.env` - a file containing all the environment variables used in the docker-compose.yml
 * `docker-compose.yml` - a docker-compose file, use to configure your application’s services
-* `seafile-mysql/` - a directory used to store the data
+* `data/` - a directory used to store the data
 
 Please make sure that all the files and directories are present.
 
