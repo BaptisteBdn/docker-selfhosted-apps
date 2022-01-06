@@ -36,6 +36,7 @@ Traefik is a key component for this selfhosted infrastructure, it is providing t
 - [Usage](#usage)
     - [Requirements](#requirements)
     - [Configuration](#configuration)
+    - [Note](#note)
 - [Update](#update)
 - [Security](#security)
 - [Backup](#backup)
@@ -155,9 +156,9 @@ Instead of allowing Traefik container full access to the Docker socket file, we 
 
 ### DNS Challenge with Let's Encrypt
 
-Traefik can use an ACME provider (like Let's Encrypt) for automatic certificate generation. It will create the certificate and attempt to renew it automatically 30 days before expiration.
+Traefik can use an ACME provider (like Let's Encrypt) for automatic certificate generation. It will create the certificate and attempt to renew it automatically 30 days before expiration. One of the great benefit of using DNS challenges is that it will allow us to use wildcard certificates, on the other hand, it can create a security risk as it requires giving rights to Traefik to create and remove some DNS records.
 
-For the DNS challenge, you'll need a [working provider](https://doc.traefik.io/traefik/https/acme/#providers) along with the credentials allowing to create and remove DNS records.
+For the DNS challenge, you'll need a [working provider](https://doc.traefik.io/traefik/https/acme/#providers) along with the credentials allowing to create and remove DNS records, 
 If you are using OVH, you can use this [guide](https://medium.com/nephely/configure-traefik-for-the-dns-01-challenge-with-ovh-as-dns-provider-c737670c0434) to retrieve the credentials.
 
 
@@ -195,9 +196,30 @@ Before using the docker-compose file, please update the following configurations
 
 - **change the domain** : The current domain is example.com, change it to your domain. The change need to be made in `.env` and `traefik.yml` <br>
   ```bash
-    sed -i -e "s/example.com/your-domain.tld/g" traefik.yml 
+    DOMAIN=example
+    TLD=com
+    sed -i -e "s/example/'$DOMAIN'/g" .env 
+    sed -i -e "s/com/'$TLD'/g" .env
+    sed -i -e "s/example.com/'$DOMAIN'.'$TLD'/g" traefik.yml 
   ```
-- **change the dns provider credentials** : Replace the provider name in `traefik.yml` if you are not using ovh. Replace the environment variables in `.env` and in `docker-compose.yml`<br>
+- **change the dns provider credentials** : Replace the provider name in `traefik.yml` if you are not using ovh. Replace the environment variables in `.env` and in `docker-compose.yml`. The example uses OVH but it can work with other providers, such as GoDaddy :<br>
+  - Get the [required settings](https://go-acme.github.io/lego/dns/godaddy/) and update the `.env` file
+  ```bash
+    # DNS challenge credentials
+    GODADDY_API_KEY=xxxxx
+    GODADDY_API_SECRET=xxxxx
+  ```
+  - This is the only case where you are going to have to modify the docker-compose
+  ```yaml
+    environment:
+      - GODADDY_API_KEY${GODADDY_API_KEY}
+      - GODADDY_API_SECRET=${GODADDY_API_SECRET}
+  ```
+
+- **create the docker network** : As our services are split in multiple docker-compose, we need a network so that traefik can forward the requests. <br>
+  ```bash
+    sudo docker network create proxy
+  ```
 
 - **update the whitelist (optional)** : Replace the IP address in `rules/whitelist.yml`. Use the IP address as well as the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). Whitelist is disable by default with `0.0.0.0/0`. The whitelist will be used on containers setting the following label. <br>
   ```yaml
@@ -206,6 +228,23 @@ Before using the docker-compose file, please update the following configurations
   ```
   You can use the IP address of the server hosting your services if you are using [openvpn](../openvpn-pihole). Then your services will only be available through your VPN (recommend for a better security).
 
+You can now run :
+
+```bash
+sudo docker-compose up -d
+```
+To check the logs :
+
+```bash
+sudo docker logs traefik
+```
+
+Traefik should be up and running ! To test if everything is running smoothly, you can try and use the [webserver](../webserver) service, it is a simple apache webserver showing `Hello World`. 
+
+## Note
+
+If you want to use the [Redirect root to www](#redirect-root-to-www) fonctionnality, you also need to have a certificate generated for your root domain. In order to do so, you will need to use a service which uses the root domain.
+The simplest way to do that is by running the [webserver](../webserver) service with the root domain. It only needs to be done once, you should then be able to see the entry in `letsencrypt/acme.json`, it will then be renewed automaticaly by traefik.
 
 # Update
 
