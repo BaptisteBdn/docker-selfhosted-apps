@@ -202,6 +202,7 @@ Before using the docker-compose file, please update the following configurations
     sed -i -e "s/com/'$TLD'/g" .env
     sed -i -e "s/example.com/'$DOMAIN'.'$TLD'/g" traefik.yml 
   ```
+  
 - **change the dns provider credentials** : Replace the provider name in `traefik.yml` if you are not using ovh. Replace the environment variables in `.env` and in `docker-compose.yml`. The example uses OVH but it can work with other providers, such as GoDaddy :<br>
   - Get the [required settings](https://go-acme.github.io/lego/dns/godaddy/) and update the `.env` file
   ```bash
@@ -240,6 +241,7 @@ sudo docker logs traefik
 ```
 
 Traefik should be up and running ! To test if everything is running smoothly, you can try and use the [webserver](../webserver) service, it is a simple apache webserver showing `Hello World`. 
+Keep in mind that traefik can take a little time to generate the first certificate, usually a couple of minutes.
 
 ## Note
 

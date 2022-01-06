@@ -93,7 +93,7 @@ No specific configuration is required, just run :
 sudo docker-compose up -d
 ```
 
-You should then be able to access the gotify web-ui with the GOTIFY_DEFAULTUSER_PASS.
+You should then be able to access the gotify web-ui with the default user being `admin` and the GOTIFY_DEFAULTUSER_PASS defined in `.env`.
 
 # Update
 

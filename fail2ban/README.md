@@ -22,7 +22,7 @@ There are a lot of fail2ban configurations availabe on the internet, and you can
 
 - [About](#about)
 - [Table of Contents](#table-of-contents)
-- [File structure](#file-structure)
+- [Files structure](#files-structure)
 - [Information](#information)
     - [docker-compose](#docker-compose)
     - [jails](#jails)
@@ -120,6 +120,8 @@ No specific configuration is required, just run :
 ```bash
 sudo docker-compose up -d
 ```
+
+The jails and filters configured are going to be active, you can now create as many as you want to protect your services.
 
 # Update
 
