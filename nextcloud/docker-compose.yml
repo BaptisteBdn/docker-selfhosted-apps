@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:10.5
+    container_name: nextcloud-mysql
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+      - ./nextcloud-mysql/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWD}  # Requested, set the root's password of MySQL service.
+      - MYSQL_PASSWORD=${DB_PASSWD}
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_LOG_CONSOLE=true
+    networks:
+      - nextcloud-net
+    labels:
+      # Watchtower Update
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  nextcloud:
+    image: nextcloud:latest
+    container_name: nextcloud
+    restart: unless-stopped
+    volumes:
+      - ./shared:/shared
+    networks:
+      - proxy
+      - nextcloud-net
+    depends_on:
+      - db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nextcloud.rule=Host(`${TRAEFIK_NEXTCLOUD}`)"
+      - "traefik.http.routers.nextcloud.entrypoints=https"
+      - "traefik.http.routers.nextcloud.tls=true"
+      - "traefik.http.routers.nextcloud.tls.certresolver=mydnschallenge"
+      # Watchtower Update
+      - "com.centurylinklabs.watchtower.enable=true"
+      # Ip filtering
+      - "traefik.http.routers.nextcloud.middlewares=whitelist@file"
+
+networks:
+  nextcloud-net:
+  proxy:
+    external: true

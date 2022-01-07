@@ -8,15 +8,15 @@ services:
     volumes:
       - "./data:/data"
     environment:
-      - TRILIUM_DATA_DIR=${TRILIUM_DATA_DIR}
+      - TRILIUM_DATA_DIR=/data
     networks:
       - proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.webserver.rule=Host(`${TRAEFIK_TRILIUM}`)"
-      - "traefik.http.routers.webserver.entrypoints=https"
-      - "traefik.http.routers.webserver.tls=true"
-      - "traefik.http.routers.webserver.tls.certresolver=mydnschallenge"
+      - "traefik.http.routers.trilium.rule=Host(`${TRAEFIK_TRILIUM}`)"
+      - "traefik.http.routers.trilium.entrypoints=https"
+      - "traefik.http.routers.trilium.tls=true"
+      - "traefik.http.routers.trilium.tls.certresolver=mydnschallenge"
       # Watchtower Update
       - "com.centurylinklabs.watchtower.enable=true"
 
