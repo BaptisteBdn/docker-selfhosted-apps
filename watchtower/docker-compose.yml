@@ -10,6 +10,7 @@ services:
     environment:
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_LABEL_ENABLE=true
+      #- WATCHTOWER_MONITOR_ONLY=true
       #- WATCHTOWER_POLL_INTERVAL=30
       - WATCHTOWER_SCHEDULE=0 0 4 * * MON
       - WATCHTOWER_NOTIFICATIONS=gotify

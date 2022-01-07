@@ -97,6 +97,12 @@ Before using the docker-compose file, please update the following configurations
 
 - **change the content of the website (optional)** : Replace the content of `data` with your own website. <br>
 
+You can now run :
+
+```bash
+sudo docker-compose up -d
+```
+
 # Update
 
 The image is automatically updated with [watchtower](../watchtower) thanks to the following label :

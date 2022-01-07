@@ -17,10 +17,10 @@ FreshRSS is a self-hosted RSS feed aggregator
 - [About](#about)
 - [Table of Contents](#table-of-contents)
 - [Information](#information)
-  - [docker-compose](#docker-compose)
+    - [docker-compose](#docker-compose)
 - [Usage](#usage)
-  - [Requirements](#requirements)
-  - [Configuration](#configuration)
+    - [Requirements](#requirements)
+    - [Configuration](#configuration)
 - [Update](#update)
 - [Backup](#backup)
 
@@ -93,6 +93,12 @@ Before using the docker-compose file, please update the following configurations
   ```bash
     sed -i -e "s/freshrss.example.com/freshrss.your-domain.com/g" docker-compose.yml 
   ```
+  
+You can now run :
+
+```bash
+sudo docker-compose up -d
+```
 
 # Update
 

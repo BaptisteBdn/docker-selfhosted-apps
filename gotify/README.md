@@ -87,7 +87,7 @@ networks:
 
 ## Configuration
 
-No specific configuration is required, just run :
+Replace the environment variables in `.env` with your own, then run :
 
 ```bash
 sudo docker-compose up -d

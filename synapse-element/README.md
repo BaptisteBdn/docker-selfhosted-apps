@@ -120,7 +120,7 @@ networks:
 
 ## Configuration
 
-Check that the URL is correct in `element-web/config.json`, then run :
+Check that the URL is correct in `element-web/config.json` and replace the environment variables in `.env` with your own, then run :
 
 ```bash
 sudo docker-compose up -d

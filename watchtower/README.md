@@ -46,6 +46,8 @@ The following docker-compose is configured to check for update every monday. If 
 
 Watchtower if configured to automatically upgrade your images and to then, send you a notification with [gotify](../gotify). Everything can be changed by modifying the [environnement variables](https://containrrr.dev/watchtower/arguments/).
 
+If you want watchtower to only notify you and not upgrade the images, uncomment the following environnement variable in the docker-compose : `- WATCHTOWER_MONITOR_ONLY=true`
+
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
 
@@ -62,6 +64,7 @@ services:
     environment:
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_LABEL_ENABLE=true
+      #- WATCHTOWER_MONITOR_ONLY=true
       #- WATCHTOWER_POLL_INTERVAL=30
       - WATCHTOWER_SCHEDULE=0 0 4 * * MON
       - WATCHTOWER_NOTIFICATIONS=gotify
@@ -81,7 +84,7 @@ Replace the environment variables in `.env` with your own, then run :
 sudo docker-compose up -d
 ```
 
-Watchtower will then check for update every monday and send you a notification with gotify one an image is updated.
+Watchtower will then check for update every monday and send you a notification with gotify once an image is updated.
 
 # Update
 
