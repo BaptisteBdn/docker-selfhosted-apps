@@ -12,10 +12,10 @@ Guide with example !
 * [freshrss](freshrss/) - RSS feed aggregator
 * [gotify](gotify/) - notification service
 * [nextcloud](nextcloud/) - file-hosting software system
-* [openvpn-pihole](openvpn-pihole/) - VPN with pihole (DNS sinkhole)
+* [wireguard-pihole-unbound](wireguard-pihole-unbound3/) - combination of WireGuard, PiHole, and Unbound 
 * [seafile](seafile/) - file-hosting software system
 * [synapse-element](synapse-element/) - decentralised communication system
-* [transmission](transmission/) - 
+* [transmission](transmission/) - fast, easy, and free BitTorrent client
 * [trilium](trilium/) - hierarchical note-taking application
 * [vaultwarden](vaultwarden/) - password manager
 * [watchtower](watchtower/) - automatic docker images update
