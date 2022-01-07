@@ -14,10 +14,10 @@ services:
       - proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.webserver.rule=Host(`${TRAEFIK_FRESHRSS}`)"
-      - "traefik.http.routers.webserver.entrypoints=https"
-      - "traefik.http.routers.webserver.tls=true"
-      - "traefik.http.routers.webserver.tls.certresolver=mydnschallenge"
+      - "traefik.http.routers.freshrss.rule=Host(`${TRAEFIK_FRESHRSS}`)"
+      - "traefik.http.routers.freshrss.entrypoints=https"
+      - "traefik.http.routers.freshrss.tls=true"
+      - "traefik.http.routers.freshrss.tls.certresolver=mydnschallenge"
       # Watchtower Update
       - "com.centurylinklabs.watchtower.enable=true"
 
