@@ -77,7 +77,7 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
         - /var/log:/var/log:ro
         - ./data:/data
       environment:
-        - TZ={$TZ}
+        - TZ=${TZ}
       network_mode: "host"
       cap_add:
       - NET_ADMIN

@@ -105,10 +105,10 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
       environment:
         - PUID=1000
         - PGID=1000
-        - TZ={$TZ}
+        - TZ=${TZ}
         - SERVERPORT=51820
-        - SERVERURL={$SERVERURL} #optional
-        - PEERS={$PEERS} # How many peers to generate for you (clients)
+        - SERVERURL=${SERVERURL} #optional
+        - PEERS=${PEERS} # How many peers to generate for you (clients)
         - PEERDNS=10.2.0.100 # Set it to point to pihole
         - INTERNAL_SUBNET=10.6.0.0
       volumes:
@@ -187,7 +187,9 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
 
 ## Configuration
 
-Replace the environment variables in `.env` with your own, then run :
+The linuxserver images are using the PUID and PGID, they allow the container to map the container's internal user to a user on the host machine, more information [here](https://docs.linuxserver.io/general/understanding-puid-and-pgid).
+
+To find yours, use `id user`. Replace the environment variables in `.env` with your own, then run :
 
 ```bash
 sudo docker-compose up -d

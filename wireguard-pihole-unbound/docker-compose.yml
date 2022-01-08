@@ -27,10 +27,10 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ={$TZ}
+      - TZ=${TZ}
       - SERVERPORT=51820
-      - SERVERURL={$SERVERURL} #optional
-      - PEERS={$PEERS} # How many peers to generate for you (clients)
+      - SERVERURL=${SERVERURL} #optional
+      - PEERS=${PEERS} # How many peers to generate for you (clients)
       - PEERDNS=10.2.0.100 # Set it to point to pihole
       - INTERNAL_SUBNET=10.6.0.0
     volumes:

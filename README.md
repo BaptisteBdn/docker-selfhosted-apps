@@ -12,7 +12,6 @@ Guide with example !
 * [freshrss](freshrss/) - RSS feed aggregator
 * [gotify](gotify/) - notification service
 * [nextcloud](nextcloud/) - file-hosting software system
-* [wireguard-pihole-unbound](wireguard-pihole-unbound3/) - combination of WireGuard, PiHole, and Unbound 
 * [seafile](seafile/) - file-hosting software system
 * [synapse-element](synapse-element/) - decentralised communication system
 * [transmission](transmission/) - fast, easy, and free BitTorrent client
@@ -20,6 +19,8 @@ Guide with example !
 * [vaultwarden](vaultwarden/) - password manager
 * [watchtower](watchtower/) - automatic docker images update
 * [webserver](webserver/) - simple apache webserver
+* [wireguard-pihole-unbound](wireguard-pihole-unbound3/) - combination of WireGuard, PiHole, and Unbound 
+
 
 # Information
 

@@ -61,7 +61,7 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
       environment:
         - PUID=1000
         - PGID=1000
-        - TZ={$TZ}
+        - TZ=${TZ}
         - USER=${USER}
         - PASS=${PASS}
       ports:
