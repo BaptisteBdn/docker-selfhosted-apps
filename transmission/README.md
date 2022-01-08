@@ -60,7 +60,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/Paris
+      - TZ={$TZ}
       - USER=${USER}
       - PASS=${PASS}
     ports:

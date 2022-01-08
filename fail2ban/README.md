@@ -76,7 +76,7 @@ services:
       - /var/log:/var/log:ro
       - ./data:/data
     environment:
-      - TZ=Europe/Paris
+      - TZ={$TZ}
     network_mode: "host"
     cap_add:
     - NET_ADMIN
@@ -115,7 +115,7 @@ This filter is using regex and will match any log that fails to connect to your 
 
 ## Configuration
 
-No specific configuration is required, just run :
+Replace the environment variables in `.env` with your own, then run :
 
 ```bash
 sudo docker-compose up -d

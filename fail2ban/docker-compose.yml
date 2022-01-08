@@ -9,7 +9,7 @@ services:
       - /var/log:/var/log:ro
       - ./data:/data
     environment:
-      - TZ=Europe/Paris
+      - TZ={$TZ}
     network_mode: "host"
     cap_add:
     - NET_ADMIN

@@ -106,7 +106,7 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
       environment:
         - PUID=1000
         - PGID=1000
-        - TZ=Europe/Paris
+        - TZ={$TZ}
         - SERVERPORT=51820
         - SERVERURL={$SERVERURL} #optional
         - PEERS={$PEERS} # How many peers to generate for you (clients)
