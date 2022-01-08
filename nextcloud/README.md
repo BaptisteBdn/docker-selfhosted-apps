@@ -1,7 +1,7 @@
 # About
 
 <p align="center">
-<img src="../_utilities/nextcloud.svg" alt="nextcloud" title="nextcloud" />
+<img src="../_utilities/nextcloud.png" width="400" alt="nextcloud" title="nextcloud" />
 </p>
 
 Nextcloud is a safe home for all your data. Access & share your files, calendars, contacts, mail & more from any device, on your terms.
@@ -103,7 +103,7 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
   ```
 * .env
   ```ini
-  TRAEFIK_NEXTCLOUD=nexcloud.example.com
+  TRAEFIK_NEXTCLOUD=nextcloud.example.com
   DB_ROOT_PASSWD=xxxxxxxxxxxxxxx
   DB_PASSWD=xxxxxxxxxxxxxxx
   ```
@@ -124,6 +124,17 @@ Replace the environment variables in `.env` with your own, then run :
 ```bash
 sudo docker-compose up -d
 ```
+
+You should now be able to access the nextcloud admin account creation. 
+Nextcloud will ask you to create your admin account as well as to choose what type of database your want to use. In the docker-compose we set up a mariadb database, choose it and enter the following database credentials.
+
+<p align="center">
+<img src="../_utilities/nextcloud_instruction.png" width="250" alt="nextcloud_instruction" title="nextcloud_instruction" />
+</p>
+
+The password is the one you have modified in the `.env` file : DB_PASSWD.
+Nextcloud will now finish installing and will soon be ready to use.
+
 
 # Update
 

@@ -92,19 +92,13 @@ The docker-compose contains only one service using the freshrss image.
 
 ## Configuration
 
-Before using the docker-compose file, please update the following configurations.
-
-* **change the domain** : The current domain is example.com, change it to your domain
-  
-  ```bash
-    sed -i -e "s/freshrss.example.com/freshrss.your-domain.com/g" docker-compose.yml 
-  ```
-  
-You can now run :
+Replace the environment variables in `.env` with your own, then run :
 
 ```bash
 sudo docker-compose up -d
 ```
+
+You should now be able to access the freshrss setup instruction, it is quite straigthforward and nothing is required. 
 
 # Update
 
