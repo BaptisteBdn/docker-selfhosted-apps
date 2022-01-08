@@ -18,10 +18,10 @@ Nextcloud is a safe home for all your data. Access & share your files, calendars
 - [Table of Contents](#table-of-contents)
 - [Files structure](#files-structure)
 - [Information](#information)
-  - [docker-compose](#docker-compose)
+    - [docker-compose](#docker-compose)
 - [Usage](#usage)
-  - [Requirements](#requirements)
-  - [Configuration](#configuration)
+    - [Requirements](#requirements)
+    - [Configuration](#configuration)
 - [Update](#update)
 - [Security](#security)
 - [Backup](#backup)
@@ -50,56 +50,63 @@ Please make sure that all the files and directories are present.
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
 
-```yaml
-version: '3'
+* docker-compose.yml
+  ```yaml
+  version: '3'
 
-services:
-  db:
-    image: mariadb:10.5
-    container_name: nextcloud-mysql
-    restart: unless-stopped
-    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
-    volumes:
-      - ./nextcloud-mysql/db:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWD}  # Requested, set the root's password of MySQL service.
-      - MYSQL_PASSWORD=${DB_PASSWD}
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_LOG_CONSOLE=true
-    networks:
-      - nextcloud-net
-    labels:
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+  services:
+    db:
+      image: mariadb:10.5
+      container_name: nextcloud-mysql
+      restart: unless-stopped
+      command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+      volumes:
+        - ./nextcloud-mysql/db:/var/lib/mysql
+      environment:
+        - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWD}  # Requested, set the root's password of MySQL service.
+        - MYSQL_PASSWORD=${DB_PASSWD}
+        - MYSQL_DATABASE=nextcloud
+        - MYSQL_USER=nextcloud
+        - MYSQL_LOG_CONSOLE=true
+      networks:
+        - nextcloud-net
+      labels:
+        # Watchtower Update
+        - "com.centurylinklabs.watchtower.enable=true"
 
-  nextcloud:
-    image: nextcloud:latest
-    container_name: nextcloud
-    restart: unless-stopped
-    volumes:
-      - ./shared:/shared
-    networks:
-      - proxy
-      - nextcloud-net
-    depends_on:
-      - db
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.nextcloud.rule=Host(`${TRAEFIK_NEXTCLOUD}`)"
-      - "traefik.http.routers.nextcloud.entrypoints=https"
-      - "traefik.http.routers.nextcloud.tls=true"
-      - "traefik.http.routers.nextcloud.tls.certresolver=mydnschallenge"
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
-      # Ip filtering
-      - "traefik.http.routers.nextcloud.middlewares=whitelist@file"
+    nextcloud:
+      image: nextcloud:latest
+      container_name: nextcloud
+      restart: unless-stopped
+      volumes:
+        - ./shared:/shared
+      networks:
+        - proxy
+        - nextcloud-net
+      depends_on:
+        - db
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.nextcloud.rule=Host(`${TRAEFIK_NEXTCLOUD}`)"
+        - "traefik.http.routers.nextcloud.entrypoints=https"
+        - "traefik.http.routers.nextcloud.tls=true"
+        - "traefik.http.routers.nextcloud.tls.certresolver=mydnschallenge"
+        # Watchtower Update
+        - "com.centurylinklabs.watchtower.enable=true"
+        # Ip filtering
+        - "traefik.http.routers.nextcloud.middlewares=whitelist@file"
 
-networks:
-  nextcloud-net:
-  proxy:
-    external: true
-```
+  networks:
+    nextcloud-net:
+    proxy:
+      external: true
+  ```
+* .env
+  ```ini
+  TRAEFIK_NEXTCLOUD=nexcloud.example.com
+  DB_ROOT_PASSWD=xxxxxxxxxxxxxxx
+  DB_PASSWD=xxxxxxxxxxxxxxx
+  ```
 
 
 

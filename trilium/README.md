@@ -17,10 +17,10 @@ Trilium Notes is a hierarchical note-taking application with focus on building l
 - [About](#about)
 - [Table of Contents](#table-of-contents)
 - [Information](#information)
-  - [docker-compose](#docker-compose)
+    - [docker-compose](#docker-compose)
 - [Usage](#usage)
-  - [Requirements](#requirements)
-  - [Configuration](#configuration)
+    - [Requirements](#requirements)
+    - [Configuration](#configuration)
 - [Update](#update)
 - [Backup](#backup)
 
@@ -45,6 +45,7 @@ Please make sure that all the files and directories are present.
 
 Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
 
+* docker-compose.yml
 ```yaml
 version: '3'
 
@@ -72,6 +73,10 @@ networks:
   proxy:
     external: true
 ```
+* .env
+  ```
+  TRAEFIK_TRILIUM=trilium.example.com
+  ```
 
 The docker-compose contains only one service using the trilium image.
 

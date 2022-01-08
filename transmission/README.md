@@ -17,10 +17,10 @@ Transmission is a fast, easy, and free BitTorrent client.
 - [About](#about)
 - [Table of Contents](#table-of-contents)
 - [Information](#information)
-  - [docker-compose](#docker-compose)
+    - [docker-compose](#docker-compose)
 - [Usage](#usage)
-  - [Requirements](#requirements)
-  - [Configuration](#configuration)
+    - [Requirements](#requirements)
+    - [Configuration](#configuration)
 - [Update](#update)
 - [Backup](#backup)
 
@@ -45,43 +45,51 @@ Please make sure that all the files and directories are present.
 
 Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
 
-```yaml
-vversion: '3'
+* docker-compose.yml
+  ```yaml
+  vversion: '3'
 
-services:
- transmission:
-    image: 'linuxserver/transmission:latest'
-    container_name: transmission
-    restart: unless-stopped
-    volumes:
-      - ./data/config:/config
-      - ./data/downloads:/downloads
-      - ./data/watch:/watch
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ={$TZ}
-      - USER=${USER}
-      - PASS=${PASS}
-    ports:
-      - 51413:51413
-      - 51413:51413/udp
-    networks:
-      - proxy
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.transmission.rule=Host(`${TRAEFIK_TRANSMISSION}`)"
-      - "traefik.http.routers.transmission.entrypoints=https"
-      - "traefik.http.routers.transmission.tls=true"
-      - "traefik.http.routers.transmission.tls.certresolver=mydnschallenge"
-      - "traefik.http.services.transmission.loadbalancer.server.port=9091"
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+  services:
+  transmission:
+      image: 'linuxserver/transmission:latest'
+      container_name: transmission
+      restart: unless-stopped
+      volumes:
+        - ./data/config:/config
+        - ./data/downloads:/downloads
+        - ./data/watch:/watch
+      environment:
+        - PUID=1000
+        - PGID=1000
+        - TZ={$TZ}
+        - USER=${USER}
+        - PASS=${PASS}
+      ports:
+        - 51413:51413
+        - 51413:51413/udp
+      networks:
+        - proxy
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.transmission.rule=Host(`${TRAEFIK_TRANSMISSION}`)"
+        - "traefik.http.routers.transmission.entrypoints=https"
+        - "traefik.http.routers.transmission.tls=true"
+        - "traefik.http.routers.transmission.tls.certresolver=mydnschallenge"
+        - "traefik.http.services.transmission.loadbalancer.server.port=9091"
+        # Watchtower Update
+        - "com.centurylinklabs.watchtower.enable=true"
 
-networks:
-  proxy:
-    external: true
-```
+  networks:
+    proxy:
+      external: true
+  ```
+* .env
+  ```
+  TRAEFIK_TRILIUM=transmission.example.com
+  TZ=Europe/Paris
+  USER=xxxxxxxxxxxxxxx
+  PASS=xxxxxxxxxxxxxxx
+  ```
 
 The docker-compose contains only one service using the transmission image.
 

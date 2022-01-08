@@ -45,7 +45,6 @@ Credits to [@IAmStoxe](https://github.com/IAmStoxe/wirehole).
         - [Wireguard](#wireguard)
         - [Pihole](#pihole)
 - [Update](#update)
-- [Security](#security)
 - [Backup](#backup)
 
 <!-- /TOC -->
@@ -166,9 +165,8 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
         config:
           - subnet: 10.2.0.0/24
   ```
-
 * .env
-  ```bash
+  ```ini
   SERVERURL=vpn.example.com
 
   # How many peers to generate for you (clients)

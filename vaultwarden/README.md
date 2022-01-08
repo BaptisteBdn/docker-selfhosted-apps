@@ -50,43 +50,49 @@ Please make sure that all the files and directories are present.
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
 
-```yaml
-version: "3"
+* docker-compose.yml
+  ```yaml
+  version: "3"
 
-services:
-  bitwardenrs:
-    image: bitwardenrs/server
-    container_name: bitwardenrs
-    restart: unless-stopped
-    volumes:
-      - ./data:/data
-    environment:
-      - WEBSOCKET_ENABLED=true
-      - WEB_VAULT_ENABLED=true
-      - SIGNUPS_ALLOWED=false
-      # Comment admin token to disable admin interface
-      - ADMIN_TOKEN=${ADMIN_TOKEN}
-    networks:
-      - proxy
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.bitwarden.rule=Host(`vaultwarden.example.com`)"
-      - "traefik.http.routers.bitwarden.entrypoints=https"
-      - "traefik.http.routers.bitwarden.tls=true"
-      - "traefik.http.routers.bitwarden.tls.certresolver=mydnschallenge"
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
-      # Ip filtering
-      - "traefik.http.routers.bitwarden.middlewares=whitelist@file"
-    logging:
-      driver: "syslog"
-      options:
-        tag: "Bitwarden"
+  services:
+    bitwardenrs:
+      image: bitwardenrs/server
+      container_name: bitwardenrs
+      restart: unless-stopped
+      volumes:
+        - ./data:/data
+      environment:
+        - WEBSOCKET_ENABLED=true
+        - WEB_VAULT_ENABLED=true
+        - SIGNUPS_ALLOWED=false
+        # Comment admin token to disable admin interface
+        - ADMIN_TOKEN=${ADMIN_TOKEN}
+      networks:
+        - proxy
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.bitwarden.rule=Host(`vaultwarden.example.com`)"
+        - "traefik.http.routers.bitwarden.entrypoints=https"
+        - "traefik.http.routers.bitwarden.tls=true"
+        - "traefik.http.routers.bitwarden.tls.certresolver=mydnschallenge"
+        # Watchtower Update
+        - "com.centurylinklabs.watchtower.enable=true"
+        # Ip filtering
+        - "traefik.http.routers.bitwarden.middlewares=whitelist@file"
+      logging:
+        driver: "syslog"
+        options:
+          tag: "Bitwarden"
 
-networks:
-  proxy:
-    external: true
-```
+  networks:
+    proxy:
+      external: true
+  ```
+* .env
+  ```ini
+  TRAEFIK_VAULTWARDEN=bitwarden.example.com
+  ADMIN_TOKEN=xxxxxxxxxxxxxxxxx
+  ```
 
 # Usage
 

@@ -50,74 +50,82 @@ Please make sure that all the files and directories are present.
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
 
-```yaml
-version: '3'
+* docker-compose.yml
+  ```yaml
+  version: '3'
 
-services:
-  db:
-    image: mariadb:10.5
-    container_name: seafile-mysql
-    restart: unless-stopped
-    volumes:
-      - ./seafile-mysql/db:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=db_dev  # Requested, set the root's password of MySQL service.
-      - MYSQL_LOG_CONSOLE=true
-    networks:
-      - seafile-net
-    labels:
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+  services:
+    db:
+      image: mariadb:10.5
+      container_name: seafile-mysql
+      restart: unless-stopped
+      volumes:
+        - ./seafile-mysql/db:/var/lib/mysql
+      environment:
+        - MYSQL_ROOT_PASSWORD=db_dev  # Requested, set the root's password of MySQL service.
+        - MYSQL_LOG_CONSOLE=true
+      networks:
+        - seafile-net
+      labels:
+        # Watchtower Update
+        - "com.centurylinklabs.watchtower.enable=true"
 
-  memcached:
-    image: memcached:latest
-    container_name: seafile-memcached
-    restart: unless-stopped
-    entrypoint: memcached -m 256
-    networks:
-      - seafile-net
-    labels:
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+    memcached:
+      image: memcached:latest
+      container_name: seafile-memcached
+      restart: unless-stopped
+      entrypoint: memcached -m 256
+      networks:
+        - seafile-net
+      labels:
+        # Watchtower Update
+        - "com.centurylinklabs.watchtower.enable=true"
 
-  seafile:
-    image: seafileltd/seafile-mc:latest
-    container_name: seafile
-    restart: unless-stopped
-    volumes:
-      - ./shared:/shared
-    environment:
-      - DB_HOST=db
-      - DB_ROOT_PASSWD=${DB_ROOT_PASSWD}  # Requested, the value shuold be root's password of MySQL service.
-      - SEAFILE_ADMIN_EMAIL=${SEAFILE_ADMIN_EMAIL} # Specifies Seafile admin user, default is 'me@example.com'.
-      - SEAFILE_ADMIN_PASSWORD=${SEAFILE_ADMIN_PASSWORD}     # Specifies Seafile admin password, default is 'asecret'.
-      - SEAFILE_SERVER_LETSENCRYPT=false   # Whether to use https or not.
-      - SEAFILE_SERVER_HOSTNAME=${SEAFILE_SERVER_HOSTNAME} # Specifies your host name if https is enabled.
-      - SEAFILE_SERVICE_URL=${SEAFILE_SERVICE_URL}
-    networks:
-      - proxy
-      - seafile-net
-    depends_on:
-      - db
-      - memcached
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.seafile.rule=Host(`seafile.example.com`)"
-      - "traefik.http.routers.seafile.entrypoints=https"
-      - "traefik.http.routers.seafile.tls=true"
-      - "traefik.http.routers.seafile.tls.certresolver=mydnschallenge"
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
-      # Ip filtering
-      - "traefik.http.routers.seafile.middlewares=whitelist@file"
+    seafile:
+      image: seafileltd/seafile-mc:latest
+      container_name: seafile
+      restart: unless-stopped
+      volumes:
+        - ./shared:/shared
+      environment:
+        - DB_HOST=db
+        - DB_ROOT_PASSWD=${DB_ROOT_PASSWD}  # Requested, the value shuold be root's password of MySQL service.
+        - SEAFILE_ADMIN_EMAIL=${SEAFILE_ADMIN_EMAIL} # Specifies Seafile admin user, default is 'me@example.com'.
+        - SEAFILE_ADMIN_PASSWORD=${SEAFILE_ADMIN_PASSWORD}     # Specifies Seafile admin password, default is 'asecret'.
+        - SEAFILE_SERVER_LETSENCRYPT=false   # Whether to use https or not.
+        - SEAFILE_SERVER_HOSTNAME=${SEAFILE_SERVER_HOSTNAME} # Specifies your host name if https is enabled.
+        - SEAFILE_SERVICE_URL=${SEAFILE_SERVICE_URL}
+      networks:
+        - proxy
+        - seafile-net
+      depends_on:
+        - db
+        - memcached
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.seafile.rule=Host(`seafile.example.com`)"
+        - "traefik.http.routers.seafile.entrypoints=https"
+        - "traefik.http.routers.seafile.tls=true"
+        - "traefik.http.routers.seafile.tls.certresolver=mydnschallenge"
+        # Watchtower Update
+        - "com.centurylinklabs.watchtower.enable=true"
+        # Ip filtering
+        - "traefik.http.routers.seafile.middlewares=whitelist@file"
 
-networks:
-  seafile-net:
-  proxy:
-    external: true
-```
-
-
+  networks:
+    seafile-net:
+    proxy:
+      external: true
+  ```
+* .env
+  ```ini
+  TRAEFIK_SEAFILE=seafile.example.com
+  DB_ROOT_PASSWD=xxxxxxxxxxxxxxx 
+  SEAFILE_ADMIN_EMAIL=admin@example.com 
+  SEAFILE_ADMIN_PASSWORD=xxxxxxxxxxxxxxxx     
+  SEAFILE_SERVER_HOSTNAME=seafile.example.com
+  SEAFILE_SERVICE_URL=https://seafile.example.com
+  ```
 
 # Usage
 

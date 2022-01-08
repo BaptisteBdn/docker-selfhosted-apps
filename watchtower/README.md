@@ -51,28 +51,34 @@ If you want watchtower to only notify you and not upgrade the images, uncomment 
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
 
-```yaml
-version: "3"
+* docker-compose.yml
+  ```yaml
+  version: "3"
 
-services:
-  watchtower:
-    image: containrrr/watchtower
-    container_name: watchtower
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_LABEL_ENABLE=true
-      #- WATCHTOWER_MONITOR_ONLY=true
-      #- WATCHTOWER_POLL_INTERVAL=30
-      - WATCHTOWER_SCHEDULE=0 0 4 * * MON
-      - WATCHTOWER_NOTIFICATIONS=gotify
-      - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${GOTIFY_URL}
-      - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${GOTIFY_TOKEN}
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-```
+  services:
+    watchtower:
+      image: containrrr/watchtower
+      container_name: watchtower
+      restart: unless-stopped
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      environment:
+        - WATCHTOWER_CLEANUP=true
+        - WATCHTOWER_LABEL_ENABLE=true
+        #- WATCHTOWER_MONITOR_ONLY=true
+        #- WATCHTOWER_POLL_INTERVAL=30
+        - WATCHTOWER_SCHEDULE=0 0 4 * * MON
+        - WATCHTOWER_NOTIFICATIONS=gotify
+        - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${GOTIFY_URL}
+        - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${GOTIFY_TOKEN}
+      labels:
+        - "com.centurylinklabs.watchtower.enable=true"
+  ```
+* .env
+  ```ini
+  GOTIFY_URL=https://gotify.example.com/
+  GOTIFY_TOKEN=xxxxxxxxxxxxxxxxxx
+  ```
 
 # Usage
 

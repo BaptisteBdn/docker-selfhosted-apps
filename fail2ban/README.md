@@ -62,29 +62,34 @@ Please make sure that all the files and directories are present.
 # Information
 
 ## docker-compose
-Links to the following [docker-compose.yml](docker-compose.yml).
+Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
 
-```yaml
-version: '3'
+* docker-compose.yml
+  ```yaml
+  version: '3'
 
-services:
-  fail2ban:
-    image: crazymax/fail2ban:latest
-    container_name: fail2ban
-    restart: unless-stopped
-    volumes:
-      - /var/log:/var/log:ro
-      - ./data:/data
-    environment:
-      - TZ={$TZ}
-    network_mode: "host"
-    cap_add:
-    - NET_ADMIN
-    - NET_RAW
-    labels:
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
-```
+  services:
+    fail2ban:
+      image: crazymax/fail2ban:latest
+      container_name: fail2ban
+      restart: unless-stopped
+      volumes:
+        - /var/log:/var/log:ro
+        - ./data:/data
+      environment:
+        - TZ={$TZ}
+      network_mode: "host"
+      cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      labels:
+        # Watchtower Update
+        - "com.centurylinklabs.watchtower.enable=true"
+  ```
+* .env
+  ```ini
+  TZ=Europe/Paris
+  ```
 
 We are gonna use `/var/log` directory to parse log files.
 
@@ -100,7 +105,7 @@ The jail.d directory is provided with three examples.
 
 You can find the vaultwarden filters in the filter.d directory. For example, in `filter.d/vaultwarden-auth` you can find :
 
-```
+```ini
 [INCLUDES]
 before = common.conf
 

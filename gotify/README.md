@@ -49,34 +49,40 @@ Please make sure that all the files and directories are present.
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
 
-```yaml
-version: "3"
+* docker-compose.yml
+  ```yaml
+  version: "3"
 
-services:
-  gotify:
-    image: gotify/server
-    container_name: gotify
-    restart: unless-stopped
-    volumes:
-      - "./data:/app/data"
-    environment:
-      - GOTIFY_DEFAULTUSER_PASS=${GOTIFY_DEFAULTUSER_PASS}
-    networks:
-      - proxy
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.gotify.rule=Host(`gotify.example.com`)"
-      - "traefik.http.routers.gotify.entrypoints=https"
-      - "traefik.http.routers.gotify.tls=true"
-      - "traefik.http.routers.gotify.tls.certresolver=mydnschallenge"
+  services:
+    gotify:
+      image: gotify/server
+      container_name: gotify
+      restart: unless-stopped
+      volumes:
+        - "./data:/app/data"
+      environment:
+        - GOTIFY_DEFAULTUSER_PASS=${GOTIFY_DEFAULTUSER_PASS}
+      networks:
+        - proxy
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.gotify.rule=Host(`gotify.example.com`)"
+        - "traefik.http.routers.gotify.entrypoints=https"
+        - "traefik.http.routers.gotify.tls=true"
+        - "traefik.http.routers.gotify.tls.certresolver=mydnschallenge"
 
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+        # Watchtower Update
+        - "com.centurylinklabs.watchtower.enable=true"
 
-networks:
-  proxy:
-    external: true
-```
+  networks:
+    proxy:
+      external: true
+  ```
+* .env
+  ```ini
+  TRAEFIK_GOTIFY=gotify.example.com
+  GOTIFY_DEFAULTUSER_PASS=xxxxxxxxxxxxxxxxx
+  ```
 
 # Usage
 

@@ -60,56 +60,63 @@ Please make sure that all the files and directories are present.
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml).
 
-```yaml
-version: '3'
+* docker-compose.yml
+  ```yaml
+  version: '3'
 
-services:
+  services:
 
-  synapse:
-    image: matrixdotorg/synapse:latest
-    restart: unless-stopped
-    container_name: synapse
-    environment:
-      - SYNAPSE_LOG_LEVEL=INFO
-    volumes:
-      - ./matrix-data:/data
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.synapse.rule=Host(`matrix.example.com`)"
-      - "traefik.http.routers.synapse.entrypoints=https"
-      - "traefik.http.routers.synapse.tls=true"
-      - "traefik.http.routers.synapse.tls.certresolver=mydnschallenge"
+    synapse:
+      image: matrixdotorg/synapse:latest
+      restart: unless-stopped
+      container_name: synapse
+      environment:
+        - SYNAPSE_LOG_LEVEL=INFO
+      volumes:
+        - ./matrix-data:/data
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.synapse.rule=Host(`matrix.example.com`)"
+        - "traefik.http.routers.synapse.entrypoints=https"
+        - "traefik.http.routers.synapse.tls=true"
+        - "traefik.http.routers.synapse.tls.certresolver=mydnschallenge"
 
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
-    networks:
-      - proxy
+        # Watchtower Update
+        - "com.centurylinklabs.watchtower.enable=true"
+      networks:
+        - proxy
 
-  element:
-    image: vectorim/element-web:latest
-    restart: unless-stopped
-    container_name: element
-    depends_on:
-      - synapse
-    volumes:
-      - ./element-web/config.json:/app/config.json:ro
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.element.rule=Host(`chat.example.com`)"
-      - "traefik.http.routers.element.entrypoints=https"
-      - "traefik.http.routers.element.tls=true"
-      - "traefik.http.routers.element.tls.certresolver=mydnschallenge"
+    element:
+      image: vectorim/element-web:latest
+      restart: unless-stopped
+      container_name: element
+      depends_on:
+        - synapse
+      volumes:
+        - ./element-web/config.json:/app/config.json:ro
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.element.rule=Host(`chat.example.com`)"
+        - "traefik.http.routers.element.entrypoints=https"
+        - "traefik.http.routers.element.tls=true"
+        - "traefik.http.routers.element.tls.certresolver=mydnschallenge"
 
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
-    networks:
-      - proxy
+        # Watchtower Update
+        - "com.centurylinklabs.watchtower.enable=true"
+      networks:
+        - proxy
 
 
-networks:
-  proxy:
-    external: true
-```
+  networks:
+    proxy:
+      external: true
+  ```
+* .env
+  ```ini
+  TRAEFIK_MATRIX=matrix.example.com
+  TRAEFIK_ELEMENT=chat.example.com
+  ```
+
 
 # Usage
 

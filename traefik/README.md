@@ -74,73 +74,87 @@ The configuration could be done using only one of the two method, but I find it 
 
 ## docker-compose
 Links to the following [docker-compose.yml](docker-compose.yml) and the corresponding [.env](.env).
-```yaml
-version: "3"
 
-services:
-  traefik:
-    image: "traefik:latest"
-    container_name: "traefik"
-    restart: unless-stopped
-    depends_on:
-      - socket-proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - "./traefik.yml:/traefik.yml:ro"
-      - "./rules:/rules:ro"
-      - "./letsencrypt:/letsencrypt"
-    environment:
-      - OVH_ENDPOINT=${OVH_ENDPOINT}
-      - OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY}
-      - OVH_APPLICATION_SECRET=${OVH_APPLICATION_SECRET}
-      - OVH_CONSUMER_KEY=${OVH_CONSUMER_KEY}
-    networks:
-      - proxy
-    labels:
-      - "traefik.enable=true"
+* docker-compose.yml
+  ```yaml
+  version: "3"
 
-      # global redirect to https
-      - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
-      - "traefik.http.routers.http-catchall.entrypoints=http"
-      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
+  services:
+    traefik:
+      image: "traefik:latest"
+      container_name: "traefik"
+      restart: unless-stopped
+      depends_on:
+        - socket-proxy
+      ports:
+        - "80:80"
+        - "443:443"
+      volumes:
+        - "./traefik.yml:/traefik.yml:ro"
+        - "./rules:/rules:ro"
+        - "./letsencrypt:/letsencrypt"
+      environment:
+        - OVH_ENDPOINT=${OVH_ENDPOINT}
+        - OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY}
+        - OVH_APPLICATION_SECRET=${OVH_APPLICATION_SECRET}
+        - OVH_CONSUMER_KEY=${OVH_CONSUMER_KEY}
+      networks:
+        - proxy
+      labels:
+        - "traefik.enable=true"
 
-      # middleware redirect
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+        # global redirect to https
+        - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+        - "traefik.http.routers.http-catchall.entrypoints=http"
+        - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
 
-      # redirect root to www
-      - "traefik.http.routers.root.rule=host(`example.com`)"
-      - "traefik.http.routers.root.entrypoints=https"
-      - "traefik.http.routers.root.middlewares=redirect-root-to-www"
-      - "traefik.http.routers.root.tls=true"
+        # middleware redirect
+        - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
 
-      # middleware redirect root to www
-      - "traefik.http.middlewares.redirect-root-to-www.redirectregex.regex=^https://example\\.com/(.*)"
-      - "traefik.http.middlewares.redirect-root-to-www.redirectregex.replacement=https://www.example.com/$${1}"
+        # redirect root to www
+        - "traefik.http.routers.root.rule=host(`example.com`)"
+        - "traefik.http.routers.root.entrypoints=https"
+        - "traefik.http.routers.root.middlewares=redirect-root-to-www"
+        - "traefik.http.routers.root.tls=true"
 
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+        # middleware redirect root to www
+        - "traefik.http.middlewares.redirect-root-to-www.redirectregex.regex=^https://example\\.com/(.*)"
+        - "traefik.http.middlewares.redirect-root-to-www.redirectregex.replacement=https://www.example.com/$${1}"
 
-  socket-proxy:
-    image: tecnativa/docker-socket-proxy
-    container_name: traefik-socket-proxy
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    environment:
-      CONTAINERS: 1
-    networks:
-      - proxy
-    labels:
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+        # Watchtower Update
+        - "com.centurylinklabs.watchtower.enable=true"
 
-networks:
-  proxy:
-    external: true
-```
+    socket-proxy:
+      image: tecnativa/docker-socket-proxy
+      container_name: traefik-socket-proxy
+      restart: unless-stopped
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock:ro
+      environment:
+        CONTAINERS: 1
+      networks:
+        - proxy
+      labels:
+        # Watchtower Update
+        - "com.centurylinklabs.watchtower.enable=true"
+
+  networks:
+    proxy:
+      external: true
+  ```
+* .env
+  ```ini
+  # DOMAIN.TLD = example.com
+  DOMAIN=example
+  TLD=com
+
+  # DNS challenge credentials - will not be the same if you are using another provider
+  OVH_ENDPOINT=xxxxxxxxxxxxxxxxxxxxxxx
+  OVH_APPLICATION_KEY=xxxxxxxxxxxxxxxxxxxxxxx
+  OVH_APPLICATION_SECRET=xxxxxxxxxxxxxxxxxxxxxxx
+  OVH_CONSUMER_KEY=xxxxxxxxxxxxxxxxxxxxxxx
+  ```
 
 The docker-compose contains two services :
 - socket-proxy : This ensures Docker’s socket file to not be exposed to the public
