@@ -68,10 +68,48 @@ You can now go forward and try whatever service you want, every example as a `# 
 
 # Other
 
+## Docker tips
+
+* Get shell access whilst the container is running
+    ```
+    docker exec -it container-name /bin/bash
+    ```
+* Monitor the logs of the container in realtime
+    ```
+    docker logs -f container-name
+    ```
+
 ## Docker images
 
 Most images are used with the tag `latest` as it simplify the testing. It is usually not recommended running an image with this tag as it is not very dynamic and precise.
 Feel free to experiment with the provided docker-compose examples and then use a better versionning system. For more information about [latest](https://vsupalov.com/docker-latest-tag/).
+
+## Updating docker images
+
+This repository images are automatically updated with watchtower, however this can be a security risk. More details in the [watchtower guide](watchtower).
+
+If you want to manually update an image, you can use docker-compose.
+
+* Update all images for a specific docker-compose file
+    ```
+    sudo docker-compose pull
+    ```
+* Update a single image
+    ```
+    sudo docker-compose pull image-name
+    ```
+* Recreate all updated containers with docker-compose
+    ```
+    sudo docker-compose up -d
+    ```
+* Recreate a single container with docker-compose
+    ```
+    sudo docker-compose up -d container-name
+    ```
+* Remove all dangling images
+    ```
+    sudo docker image prune
+    ```
 
 ## Docker tools
 
