@@ -3,7 +3,7 @@ version: "3"
 services:
   bitwardenrs:
     image: vaultwarden/server
-    container_name: bitwardenrs
+    container_name: vaultwarden
     restart: unless-stopped
     volumes:
       - ./data:/data
@@ -17,7 +17,7 @@ services:
       - proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.bitwarden.rule=Host(`${TRAEFIK_BITWARDEN}`)"
+      - "traefik.http.routers.bitwarden.rule=Host(`${TRAEFIK_VAULTWARDEN}`)"
       - "traefik.http.routers.bitwarden.entrypoints=https"
       - "traefik.http.routers.bitwarden.tls=true"
       - "traefik.http.routers.bitwarden.tls.certresolver=mydnschallenge"

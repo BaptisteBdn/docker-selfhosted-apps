@@ -56,8 +56,8 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
 
   services:
     bitwardenrs:
-      image: bitwardenrs/server
-      container_name: bitwardenrs
+      image: vaultwarden/server
+      container_name: vaultwarden
       restart: unless-stopped
       volumes:
         - ./data:/data
@@ -71,7 +71,7 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
         - proxy
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.bitwarden.rule=Host(`vaultwarden.example.com`)"
+        - "traefik.http.routers.bitwarden.rule=Host(`${TRAEFIK_VAULTWARDEN}`)"
         - "traefik.http.routers.bitwarden.entrypoints=https"
         - "traefik.http.routers.bitwarden.tls=true"
         - "traefik.http.routers.bitwarden.tls.certresolver=mydnschallenge"
@@ -90,7 +90,7 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
   ```
 * .env
   ```ini
-  TRAEFIK_VAULTWARDEN=bitwarden.example.com
+  TRAEFIK_VAULTWARDEN=vaultwarden.example.com
   ADMIN_TOKEN=xxxxxxxxxxxxxxxxx
   ```
 
