@@ -58,11 +58,11 @@ To begin with, you can clone this repository on your host.
 git clone https://github.com/BaptisteBdn/docker-selfhosted-apps.git
 ```
 
-Provided you already have a domain, you can use the following commands to update all `.env` at once.
+Provided you already have a domain, you can use the following commands to update all `.env` at once as well as some specific config files.
 
 ```bash
 DOMAIN=your-domain.com
-find ./ \( -name ".env" -or -name "*.yml" \) -type f -exec sed -i 's/example.com/'$DOMAIN'/g' {} \;
+find ./ \( -name ".env" -or -name "*.yml" -or -name "*.json" \) -type f -exec sed -i 's/example.com/'$DOMAIN'/g' {} \;
 ```
 
 You can now go forward and try whatever service you want, every example as a `# Usage` section to guide you through the process. However, as most of them are using Traefik, it is recommended to set this one first.

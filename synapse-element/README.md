@@ -76,7 +76,7 @@ Links to the following [docker-compose.yml](docker-compose.yml).
         - ./matrix-data:/data
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.synapse.rule=Host(`matrix.example.com`)"
+        - "traefik.http.routers.synapse.rule=Host(`${TRAEFIK_MATRIX}`)"
         - "traefik.http.routers.synapse.entrypoints=https"
         - "traefik.http.routers.synapse.tls=true"
         - "traefik.http.routers.synapse.tls.certresolver=mydnschallenge"
@@ -96,7 +96,7 @@ Links to the following [docker-compose.yml](docker-compose.yml).
         - ./element-web/config.json:/app/config.json:ro
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.element.rule=Host(`chat.example.com`)"
+        - "traefik.http.routers.element.rule=Host(`${TRAEFIK_ELEMENT}`)"
         - "traefik.http.routers.element.entrypoints=https"
         - "traefik.http.routers.element.tls=true"
         - "traefik.http.routers.element.tls.certresolver=mydnschallenge"
@@ -114,7 +114,7 @@ Links to the following [docker-compose.yml](docker-compose.yml).
 * .env
   ```ini
   TRAEFIK_MATRIX=matrix.example.com
-  TRAEFIK_ELEMENT=chat.example.com
+  TRAEFIK_ELEMENT=element.example.com
   ```
 
 
@@ -122,18 +122,30 @@ Links to the following [docker-compose.yml](docker-compose.yml).
 
 ## Requirements
 - [Traefik up and running](../traefik).
-- Subdomains of your choice, this example uses `chat` and `matrix`.
+- Subdomains of your choice, this example uses `element` and `matrix`.
     - You should be able to create a subdomain with your DNS provider, use a `A record` with the same IP address as your root domain.
 
 ## Configuration
 
-Check that the URL is correct in `element-web/config.json` and replace the environment variables in `.env` with your own, then run :
+Check that the URL is correct in `element-web/config.json` and replace the environment variables in `.env` with your own.
+
+The first step is to generate a valid config file. To do this, you can run the image with the generate command line option. Please replace the `SYNAPSE_SERVER_NAME` with your own.
+
+```bash
+sudo docker run -it --rm \
+    -v "$(pwd)/matrix-data:/data" \
+    -e SYNAPSE_SERVER_NAME=matrix.example.com \
+    -e SYNAPSE_REPORT_STATS=no \
+    matrixdotorg/synapse:latest generate
+```
+
+You can now start the service with :
 
 ```bash
 sudo docker-compose up -d
 ```
 
-You should then be able to access the element web-ui and create a new account.
+You can check that the matrix server is working by accessing the URL. You should then be able to access the element web-ui and create a new account. By default, the registration is disabled, change the `enable_registration` value to `true` in `matrix-data/homeserver.yaml`, then restart the container.
 
 # Update
 
