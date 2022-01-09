@@ -105,8 +105,8 @@ You should now be able to access the freshrss setup instruction, it is quite str
 The image is automatically updated with [watchtower](../watchtower) thanks to the following label :
 
 ```yaml
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+  # Watchtower Update
+  - "com.centurylinklabs.watchtower.enable=true"
 ```
 
 # Backup

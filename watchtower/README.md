@@ -76,6 +76,7 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
   ```
 * .env
   ```ini
+  # The gotify token can be configured in the gotify WebUI
   GOTIFY_URL=https://gotify.example.com/
   GOTIFY_TOKEN=xxxxxxxxxxxxxxxxxx
   ```
@@ -83,6 +84,8 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
 # Usage
 
 ## Configuration
+
+If you don't want to use gotify for the notification, feel free to remove the environnement variables from both the `.env` and the `docker-compose.yml` file.
 
 Replace the environment variables in `.env` with your own, then run :
 
@@ -97,8 +100,8 @@ Watchtower will then check for update every monday and send you a notification w
 The image is automatically updated with [watchtower](../watchtower) thanks to the following label :
 
 ```yaml
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+  # Watchtower Update
+  - "com.centurylinklabs.watchtower.enable=true"
 ```
 
 # Security

@@ -141,8 +141,8 @@ Nextcloud will now finish installing and will soon be ready to use.
 The image is automatically updated with [watchtower](../watchtower) thanks to the following label :
 
 ```yaml
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+  # Watchtower Update
+  - "com.centurylinklabs.watchtower.enable=true"
 ```
 
 # Security

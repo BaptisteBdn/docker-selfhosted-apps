@@ -116,8 +116,8 @@ Before using the docker-compose file, please update the following configurations
 The image is automatically updated with [watchtower](../watchtower) thanks to the following label :
 
 ```yaml
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+  # Watchtower Update
+  - "com.centurylinklabs.watchtower.enable=true"
 ```
 
 # Backup

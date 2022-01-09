@@ -116,8 +116,8 @@ You should then be able to access the bitwarden web-ui admin interface with the 
 The image is automatically updated with [watchtower](../watchtower) thanks to the following label :
 
 ```yaml
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+  # Watchtower Update
+  - "com.centurylinklabs.watchtower.enable=true"
 ```
 
 # Security

@@ -45,6 +45,7 @@ Credits to [@IAmStoxe](https://github.com/IAmStoxe/wirehole).
         - [Wireguard](#wireguard)
         - [Pihole](#pihole)
 - [Update](#update)
+- [Security](#security)
 - [Backup](#backup)
 
 <!-- /TOC -->
@@ -216,8 +217,19 @@ Once connected to the VPN you should be able to access the pihole admin interfac
 The images are automatically updated with [watchtower](../watchtower) thanks to the following label :
 
 ```yaml
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+  # Watchtower Update
+  - "com.centurylinklabs.watchtower.enable=true"
+```
+
+# Security
+
+A VPN is often a good solution to always have a dedicated IP. If you want to secure your others services, you can limit their access only when you are connected to your VPN. An easy way to do that is to add the VPN IP to the traefik [whitelist](traefik/rules/whitelist.yml).
+
+Keep in mind that only the containers that have the following label attached will be prone to this IP restriction.
+
+```yaml
+  # Ip filtering
+  - "traefik.http.routers.bitwarden.middlewares=whitelist@file"
 ```
 
 # Backup

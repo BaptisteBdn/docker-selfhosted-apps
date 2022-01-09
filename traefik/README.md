@@ -267,8 +267,8 @@ The simplest way to do that is by running the [webserver](../webserver) service 
 Both `traefik` and `socket-proxy` images are automatically updated with [watchtower](../watchtower) thanks to the following label :
 
 ```yaml
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
+  # Watchtower Update
+  - "com.centurylinklabs.watchtower.enable=true"
 ```
 
 
