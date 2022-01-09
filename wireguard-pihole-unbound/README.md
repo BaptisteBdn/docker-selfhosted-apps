@@ -104,8 +104,8 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
         - NET_ADMIN
         - SYS_MODULE
       environment:
-        - PUID=1000
-        - PGID=1000
+        - PUID=${PUID}
+        - PGID=${PGID}
         - TZ=${TZ}
         - SERVERPORT=51820
         - SERVERURL=${SERVERURL} #optional

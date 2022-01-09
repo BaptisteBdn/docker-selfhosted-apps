@@ -10,11 +10,11 @@ services:
       - ./data/downloads:/downloads
       - ./data/watch:/watch
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TZ}
-      - USER=${USER}
-      - PASS=${PASS}
+      - USER=${WEB_USER}
+      - PASS=${WEB_PASS}
     ports:
       - 51413:51413
       - 51413:51413/udp

@@ -22,3 +22,6 @@ certificatesResolvers:
       dnsChallenge:
         provider: ovh
         delayBeforeCheck: 10
+
+log:
+  level: INFO

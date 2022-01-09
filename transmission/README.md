@@ -59,11 +59,11 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
         - ./data/downloads:/downloads
         - ./data/watch:/watch
       environment:
-        - PUID=1000
-        - PGID=1000
+        - PUID=${PUID}
+        - PGID=${PGID}
         - TZ=${TZ}
-        - USER=${USER}
-        - PASS=${PASS}
+        - USER=${WEB_USER}
+        - PASS=${WEB_PASS}
       ports:
         - 51413:51413
         - 51413:51413/udp
@@ -85,10 +85,14 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
   ```
 * .env
   ```
-  TRAEFIK_TRILIUM=transmission.example.com
+  TRAEFIK_TRANSMISSION=transmission.example.com
   TZ=Europe/Paris
-  USER=xxxxxxxxxxxxxxx
-  PASS=xxxxxxxxxxxxxxx
+  WEB_USER=xxxxxxxxxxxxxxx
+  WEB_PASS=xxxxxxxxxxxxxxx
+
+  # user PUID and group PGID - can be found by running id your-user
+  PUID=1000
+  PGID=1000
   ```
 
 The docker-compose contains only one service using the transmission image.
@@ -100,16 +104,17 @@ The docker-compose contains only one service using the transmission image.
 * [Traefik up and running](../traefik).
 * A subdomain of your choice, this example uses `transmission`.
   * You should be able to create a subdomain with your DNS provider, use a `A record` with the same IP address as your root domain.
+* Port 51413 open, check your firewall.
 
 ## Configuration
 
-Before using the docker-compose file, please update the following configurations.
+The linuxserver images are using the PUID and PGID, they allow the container to map the container's internal user to a user on the host machine, more information [here](https://docs.linuxserver.io/general/understanding-puid-and-pgid).
 
-* **change the domain** : The current domain is example.com, change it to your domain
-  
-  ```bash
-    sed -i -e "s/transmission.example.com/transmission.your-domain.com/g" docker-compose.yml 
-  ```
+To find yours, use `id user`. Replace the environment variables in `.env` with your own, then run :
+
+```bash
+sudo docker-compose up -d
+```
 
 # Update
 
