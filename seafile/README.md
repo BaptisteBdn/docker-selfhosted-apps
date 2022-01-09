@@ -62,7 +62,7 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
       volumes:
         - ./seafile-mysql/db:/var/lib/mysql
       environment:
-        - MYSQL_ROOT_PASSWORD=db_dev  # Requested, set the root's password of MySQL service.
+        - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWD}  # Requested, set the root's password of MySQL service.
         - MYSQL_LOG_CONSOLE=true
       networks:
         - seafile-net
@@ -93,8 +93,8 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
         - SEAFILE_ADMIN_EMAIL=${SEAFILE_ADMIN_EMAIL} # Specifies Seafile admin user, default is 'me@example.com'.
         - SEAFILE_ADMIN_PASSWORD=${SEAFILE_ADMIN_PASSWORD}     # Specifies Seafile admin password, default is 'asecret'.
         - SEAFILE_SERVER_LETSENCRYPT=false   # Whether to use https or not.
-        - SEAFILE_SERVER_HOSTNAME=${SEAFILE_SERVER_HOSTNAME} # Specifies your host name if https is enabled.
-        - SEAFILE_SERVICE_URL=${SEAFILE_SERVICE_URL}
+        - SEAFILE_SERVER_HOSTNAME=${TRAEFIK_SEAFILE} # Specifies your host name if https is enabled.
+        - SEAFILE_SERVICE_URL=https://${TRAEFIK_SEAFILE}
       networks:
         - proxy
         - seafile-net
@@ -103,7 +103,7 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
         - memcached
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.seafile.rule=Host(`seafile.example.com`)"
+        - "traefik.http.routers.seafile.rule=Host(`${TRAEFIK_SEAFILE}`)"
         - "traefik.http.routers.seafile.entrypoints=https"
         - "traefik.http.routers.seafile.tls=true"
         - "traefik.http.routers.seafile.tls.certresolver=mydnschallenge"
@@ -123,8 +123,6 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
   DB_ROOT_PASSWD=xxxxxxxxxxxxxxx 
   SEAFILE_ADMIN_EMAIL=admin@example.com 
   SEAFILE_ADMIN_PASSWORD=xxxxxxxxxxxxxxxx     
-  SEAFILE_SERVER_HOSTNAME=seafile.example.com
-  SEAFILE_SERVICE_URL=https://seafile.example.com
   ```
 
 # Usage

@@ -2,7 +2,7 @@
 <img src="_utilities/docker.png" width="400" alt="docker" title="docker" />
 </p>
 
-Guide with example !
+Guide with examples !
 
 # Services
 
