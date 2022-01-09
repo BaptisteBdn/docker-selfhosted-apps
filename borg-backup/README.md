@@ -181,7 +181,7 @@ Add any **full path** to any directory or file that you want to exclude to `excl
 Now that everything is set up, you can run the backup script.
 
 ```bash
-/bin/bash /path/to/backup-borg-s3.sh >> /var/log/backup.log
+sudo /bin/bash /path/to/backup-borg-s3.sh
 ```
 
 You can also use cron to automate the backup.

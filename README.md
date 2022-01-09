@@ -128,3 +128,6 @@ A compilation of resources mainly focus on security.
 - [Docker security](https://docs.docker.com/engine/security/) - official docker documentation about security
 - [Docker security OWASP](https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html) - OWASP security cheat sheet
 
+# Credits
+
+This guide is inspired from [@DoTheEvo](https://github.com/DoTheEvo/selfhosted-apps-docker) own docker guide, built with caddy at its core, check it out !
