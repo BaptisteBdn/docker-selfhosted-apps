@@ -56,8 +56,6 @@ services:
     restart: unless-stopped
     volumes:
       - "./data:/data"
-    environment:
-      - TRILIUM_DATA_DIR=${TRILIUM_DATA_DIR}
     networks:
       - proxy
     labels:
@@ -90,13 +88,13 @@ The docker-compose contains only one service using the trilium image.
 
 ## Configuration
 
-Before using the docker-compose file, please update the following configurations.
+Replace the environment variables in `.env` with your own, then run :
 
-* **change the domain** : The current domain is example.com, change it to your domain
-  
-  ```bash
-    sed -i -e "s/trilium.example.com/trilium.your-domain.com/g" docker-compose.yml 
-  ```
+```bash
+sudo docker-compose up -d
+```
+
+You should then be able to access the trilium web-ui and start creating notes !
 
 # Update
 

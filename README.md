@@ -107,9 +107,9 @@ If you want to manually update an image, you can use docker-compose.
     ```
     sudo docker-compose up -d container-name
     ```
-* Remove all dangling images
+* Remove all dangling and unused images
     ```
-    sudo docker image prune
+    sudo docker image prune  -a
     ```
 
 ## Docker tools

@@ -123,6 +123,7 @@ The image is automatically updated with [watchtower](../watchtower) thanks to th
 # Security
 
 Comment admin token to disable the admin interface after you have created your users.
+The IP filtering label is set in the docker-compose, you can restrict access to this service by modifying the traefik [whitelist](traefik/rules/whitelist.yml).
 
 # Backup
 

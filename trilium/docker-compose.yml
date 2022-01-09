@@ -7,8 +7,6 @@ services:
     restart: unless-stopped
     volumes:
       - "./data:/data"
-    environment:
-      - TRILIUM_DATA_DIR=/data
     networks:
       - proxy
     labels:
