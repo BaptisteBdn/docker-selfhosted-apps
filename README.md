@@ -69,6 +69,12 @@ You can now go forward and try whatever service you want, every example as a `# 
 
 # Other
 
+## Docker and UFW
+
+UFW is a popular iptables front end on Ubuntu that makes it easy to manage firewall rules. But when Docker is installed, Docker bypass the UFW rules and the published ports can be accessed from outside.
+
+An [easy fix](https://github.com/chaifeng/ufw-docker) is available, allowing to easily manage your firewall. As most of the services are going through Traefik, only the port 443 is mandatory. If another port is required, it will be listed in the requirements.
+
 ## Docker tips
 
 * Get shell access whilst the container is running
