@@ -19,7 +19,8 @@ Guide with examples !
 * [vaultwarden](vaultwarden/) - password manager
 * [watchtower](watchtower/) - automatic docker images update
 * [webserver](webserver/) - simple apache webserver
-* [wireguard-pihole-unbound](wireguard-pihole-unbound3/) - combination of WireGuard, PiHole, and Unbound 
+* [wireguard-pihole-unbound](wireguard-pihole-unbound3/) - combination of WireGuard, PiHole, and Unbound
+* [wordpress](wordpress/) - blogging tool with a content management system (CMS)
 
 
 # Information

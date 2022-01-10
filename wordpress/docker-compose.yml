@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb
+    container_name: wordpress-mysql
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+      - ./wordpress-mysql/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWD}  # Requested, set the root's password of MySQL service.
+      - MYSQL_PASSWORD=${DB_PASSWD}
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_LOG_CONSOLE=true
+    networks:
+      - wordpress-net
+    labels:
+      # Watchtower Update
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    restart: unless-stopped
+    volumes:
+      - ./data:/var/www/html
+    networks:
+      - proxy
+      - wordpress-net
+    depends_on:
+      - db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wordpress.rule=Host(`${TRAEFIK_WORDPRESS}`)"
+      - "traefik.http.routers.wordpress.entrypoints=https"
+      - "traefik.http.routers.wordpress.tls=true"
+      - "traefik.http.routers.wordpress.tls.certresolver=mydnschallenge"
+      # Watchtower Update
+      - "com.centurylinklabs.watchtower.enable=true"
+      # Ip filtering
+      - "traefik.http.routers.wordpress.middlewares=whitelist@file"
+
+networks:
+  wordpress-net:
+  proxy:
+    external: true
