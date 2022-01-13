@@ -125,7 +125,7 @@ Then replace the following variables in `data/wp-config.php`.
   define( 'DB_PASSWORD', 'xxxxxxxxxxxxxxx' );
   ```
 
-* Change the following unique keys and salt, you can use this [wordpress salt generate](https://api.wordpress.org/secret-key/1.1/salt/) and copy past it
+* Change the following unique keys and salt, you can use this [wordpress salt generator](https://api.wordpress.org/secret-key/1.1/salt/) and copy past it
   ```
   define( 'AUTH_KEY',         'change-me' );
   define( 'SECURE_AUTH_KEY',  'change-me' );
