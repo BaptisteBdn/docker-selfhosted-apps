@@ -11,10 +11,10 @@
 Wireguard is a virtual private network (VPN), it provides you a secure, encrypted tunnel for online traffic and allow you to manage a remote private network.
 Pihole is a DNS sinkhole that protects your devices from unwanted content without installing any client-side software. Unbound is a validating, recursive, caching DNS resolver. 
 
-* OpenVPN
-  * [Github](https://github.com/OpenVPN/openvpn)
-  * [Documentation](https://openvpn.net/community-resources/management-interface/)
-  * [Docker Image](https://hub.docker.com/r/kylemanna/openvpn/)
+* Wireguard
+  * [Github](https://github.com/WireGuard)
+  * [Documentation](https://www.wireguard.com/quickstart/)
+  * [Docker Image](https://hub.docker.com/r/linuxserver/wireguard)
 
 * Pi-Hole
   * [Github](https://github.com/pi-hole/pi-hole)
@@ -223,13 +223,13 @@ The images are automatically updated with [watchtower](../watchtower) thanks to 
 
 # Security
 
-A VPN is often a good solution to always have a dedicated IP. If you want to secure your others services, you can limit their access only when you are connected to your VPN. An easy way to do that is to add the VPN IP to the traefik [whitelist](traefik/rules/whitelist.yml).
+A VPN is often a good solution to always have a dedicated IP. If you want to secure your others services, you can limit their access only when you are connected to your VPN. An easy way to do that is to add the private IP address range used by docker (172.16.0.0/12), your internal IP through the VPN will be one of this range, to the traefik [whitelist](traefik/rules/whitelist.yml).
 
 Keep in mind that only the containers that have the following label attached will be prone to this IP restriction.
 
 ```yaml
   # Ip filtering
-  - "traefik.http.routers.bitwarden.middlewares=whitelist@file"
+  - "traefik.http.routers.service-router-name.middlewares=whitelist@file"
 ```
 
 # Backup

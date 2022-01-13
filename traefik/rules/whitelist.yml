@@ -4,3 +4,5 @@ http:
       ipWhiteList:
         sourceRange:
           - "0.0.0.0/0"
+          # Private IP range use by docker, enable to enable services access through VPN
+          #- "172.16.0.0/12"

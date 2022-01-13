@@ -239,9 +239,9 @@ Before using the docker-compose file, please update the following configurations
 - **update the whitelist (optional)** : Replace the IP address in `rules/whitelist.yml`. Use the IP address as well as the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). Whitelist is disable by default with `0.0.0.0/0`. The whitelist will be used on containers setting the following label. <br>
   ```yaml
     # Ip filtering
-    - "traefik.http.routers.bitwarden.middlewares=whitelist@file"
+    - "traefik.http.routers.service-router-name.middlewares=whitelist@file"
   ```
-  You can use the IP address of the server hosting your services if you are using [openvpn](../openvpn-pihole). Then your services will only be available through your VPN (recommend for a better security).
+  You can use the private IP address range used by docker (172.16.0.0/12) if you are using [wireguard](../wireguard-pihole-unbound). Then your services will only be available through your VPN (recommend for a better security).
 
 You can now run :
 
