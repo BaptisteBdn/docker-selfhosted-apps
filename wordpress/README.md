@@ -18,10 +18,10 @@ WordPress is a free and open source blogging tool and a content management syste
 - [Table of Contents](#table-of-contents)
 - [Files structure](#files-structure)
 - [Information](#information)
-  - [docker-compose](#docker-compose)
+    - [docker-compose](#docker-compose)
 - [Usage](#usage)
-  - [Requirements](#requirements)
-  - [Configuration](#configuration)
+    - [Requirements](#requirements)
+    - [Configuration](#configuration)
 - [Update](#update)
 - [Backup](#backup)
 
@@ -51,40 +51,40 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
 
 * docker-compose.yml
   ```yaml
-    version: '3'
+  version: '3'
 
-    services:
+  services:
     db:
-        image: mariadb
-        container_name: wordpress-mysql
-        restart: unless-stopped
-        command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
-        volumes:
+      image: mariadb
+      container_name: wordpress-mysql
+      restart: unless-stopped
+      command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+      volumes:
         - ./wordpress-mysql/db:/var/lib/mysql
-        environment:
+      environment:
         - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWD}  # Requested, set the root's password of MySQL service.
         - MYSQL_PASSWORD=${DB_PASSWD}
         - MYSQL_DATABASE=wordpress
         - MYSQL_USER=wordpress
         - MYSQL_LOG_CONSOLE=true
-        networks:
+      networks:
         - wordpress-net
-        labels:
+      labels:
         # Watchtower Update
         - "com.centurylinklabs.watchtower.enable=true"
 
     wordpress:
-        image: wordpress:latest
-        container_name: wordpress
-        restart: unless-stopped
-        volumes:
+      image: wordpress:latest
+      container_name: wordpress
+      restart: unless-stopped
+      volumes:
         - ./data:/var/www/html
-        networks:
+      networks:
         - proxy
         - wordpress-net
-        depends_on:
+      depends_on:
         - db
-        labels:
+      labels:
         - "traefik.enable=true"
         - "traefik.http.routers.wordpress.rule=Host(`${TRAEFIK_WORDPRESS}`)"
         - "traefik.http.routers.wordpress.entrypoints=https"
@@ -92,13 +92,11 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
         - "traefik.http.routers.wordpress.tls.certresolver=mydnschallenge"
         # Watchtower Update
         - "com.centurylinklabs.watchtower.enable=true"
-        # Ip filtering
-        - "traefik.http.routers.wordpress.middlewares=whitelist@file"
 
-    networks:
+  networks:
     wordpress-net:
     proxy:
-        external: true
+      external: true
   ```
 * .env
   ```ini
@@ -118,7 +116,28 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
 
 ## Configuration
 
-Replace the environment variables in `.env` with your own, then run :
+Replace the environment variables in `.env` with your own.
+
+Then replace the following variables in `data/wp-config.php`.
+
+* DB_PASSWORD is equivalent to DB_PASSWD in `.env`
+  ```
+  define( 'DB_PASSWORD', 'xxxxxxxxxxxxxxx' );
+  ```
+
+* Change the following unique keys and salt, you can use this [wordpress salt generate](https://api.wordpress.org/secret-key/1.1/salt/) and copy past it
+  ```
+  define( 'AUTH_KEY',         'change-me' );
+  define( 'SECURE_AUTH_KEY',  'change-me' );
+  define( 'LOGGED_IN_KEY',    'change-me' );
+  define( 'NONCE_KEY',        'change-me' );
+  define( 'AUTH_SALT',        'change-me' );
+  define( 'SECURE_AUTH_SALT', 'change-me' );
+  define( 'LOGGED_IN_SALT',   'change-me' );
+  define( 'NONCE_SALT',       'change-me' );
+  ```
+
+You can now run :
 
 ```bash
 sudo docker-compose up -d
@@ -134,7 +153,7 @@ The image is automatically updated with [watchtower](../watchtower) thanks to th
   # Watchtower Update
   - "com.centurylinklabs.watchtower.enable=true"
 ```
-
+ACCESS_DENIED\
 # Backup
 
 Docker volumes are globally backed up using [borg-backup](../borg-backup). 

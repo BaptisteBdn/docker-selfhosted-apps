@@ -39,8 +39,6 @@ services:
       - "traefik.http.routers.wordpress.tls.certresolver=mydnschallenge"
       # Watchtower Update
       - "com.centurylinklabs.watchtower.enable=true"
-      # Ip filtering
-      - "traefik.http.routers.wordpress.middlewares=whitelist@file"
 
 networks:
   wordpress-net:
