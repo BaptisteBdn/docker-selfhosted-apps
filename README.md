@@ -11,6 +11,7 @@ Guide with examples !
 * [fail2ban](fail2ban/) - security tool (ban IP)
 * [freshrss](freshrss/) - RSS feed aggregator
 * [gotify](gotify/) - notification service
+* [jellyfin](jellyfin/) - media System
 * [nextcloud](nextcloud/) - file-hosting software system
 * [seafile](seafile/) - file-hosting software system
 * [synapse-element](synapse-element/) - decentralised communication system
