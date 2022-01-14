@@ -130,3 +130,9 @@ The image is automatically updated with [watchtower](../watchtower) thanks to th
 # Backup
 
 Docker volumes are globally backed up using [borg-backup](../borg-backup). 
+
+You may want to exclude the cache and media folder from the backups, add the following to [`borg-backup/excludes.txt`](../borg-backup/excludes.txt):
+```
+/full/path/to/jellyfin/cache
+/full/path/to/jellyfin/media
+```
