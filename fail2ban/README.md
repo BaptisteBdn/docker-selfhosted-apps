@@ -28,6 +28,7 @@ There are a lot of fail2ban configurations availabe on the internet, and you can
     - [jails](#jails)
 - [Usage](#usage)
     - [Configuration](#configuration)
+    - [Fail2ban](#fail2ban)
 - [Update](#update)
 - [Security](#security)
 - [Backup](#backup)
@@ -129,6 +130,25 @@ sudo docker-compose up -d
 ```
 
 The jails and filters configured are going to be active, you can now create as many as you want to protect your services.
+
+## Fail2ban
+
+[Fail2ban commands](http://www.fail2ban.org/wiki/index.php/Commands) can be used through the container. 
+Here is an example if you want to unban an IP manually:
+
+```
+sudo docker exec -t fail2ban fail2ban-client set <JAIL> unbanip <IP>
+```
+
+The same example with [bitwarden](../vaultwarden), in the case you failed to enter the right password 3 times:
+```
+sudo docker exec -t fail2ban fail2ban-client set bitwarden-auth unbanip <IP>
+```
+
+For a more general example, you can use any fail2ban command as follows:
+```
+sudo docker exec -t fail2ban fail2ban-client <COMMAND>
+```
 
 # Update
 
