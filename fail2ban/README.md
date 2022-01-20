@@ -103,7 +103,7 @@ The jail.d directory is provided with three examples.
 
 - bitwarden-auth.conf : provides your vaultwarden password manager from bruteforce. 
 
-- bitwarden-admin : provides your vaultwarden admin dashboard from bruteforce. 
+- bitwarden-admin.conf : provides your vaultwarden admin dashboard from bruteforce. 
 
 You can find the vaultwarden filters in the filter.d directory. For example, in `filter.d/vaultwarden-auth` you can find :
 
