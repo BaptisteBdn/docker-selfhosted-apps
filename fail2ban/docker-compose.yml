@@ -10,7 +10,7 @@ services:
       - ./data:/data
     environment:
       - TZ=${TZ}
-    network_mode: "host"
+    network_mode: host
     cap_add:
     - NET_ADMIN
     - NET_RAW

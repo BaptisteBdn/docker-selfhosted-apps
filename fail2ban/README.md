@@ -39,13 +39,15 @@ There are a lot of fail2ban configurations availabe on the internet, and you can
 .
 |-- data/
 |   |-- action.d/
+|   |   |-- nftables-forward.conf
+|   |   |-- nftables-input.conf
 |   |-- db/
 |   |-- filter.d/
 |   |   |-- bitwarden-admin.conf
 |   |   |-- bitwarden-auth.conf
 |   `-- jail.d/
 |       |-- bitwarden-admin.conf
-|       |-- bitwarden.conf
+|       |-- bitwarden-auth.conf
 |       |-- sshd.conf
 `-- docker-compose.yml
 ```
@@ -78,7 +80,7 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
         - ./data:/data
       environment:
         - TZ=${TZ}
-      network_mode: "host"
+      network_mode: host
       cap_add:
       - NET_ADMIN
       - NET_RAW
@@ -99,9 +101,9 @@ The jail.d directory is provided with three examples.
 
 - sshd.conf : provides ssh protection, will ban any IP trying to bruteforce your ssh credentials, a must-have if you are still on port 22.
 
-- vaultwarden.conf : provides your vaultwarden password manager from bruteforce. 
+- bitwarden-auth.conf : provides your vaultwarden password manager from bruteforce. 
 
-- vaultwarden-admin : provides your vaultwarden admin dashboard from bruteforce. 
+- bitwarden-admin : provides your vaultwarden admin dashboard from bruteforce. 
 
 You can find the vaultwarden filters in the filter.d directory. For example, in `filter.d/vaultwarden-auth` you can find :
 
