@@ -13,6 +13,7 @@ Guide with examples !
 * [gotify](gotify/) - notification service
 * [jellyfin](jellyfin/) - media System
 * [nextcloud](nextcloud/) - file-hosting software system
+* [portainer](portainer/) - orchestrator resources manager
 * [seafile](seafile/) - file-hosting software system
 * [synapse-element](synapse-element/) - decentralised communication system
 * [transmission](transmission/) - fast, easy, and free BitTorrent client
