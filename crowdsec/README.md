@@ -1,7 +1,7 @@
 # About
 
 <p align="center">
-<img src="../_utilities/crowdsec.png" alt="crowdsec" title="crowdsec" />
+<img src="../_utilities/crowdsec.png" width="400" alt="crowdsec" title="crowdsec" />
 </p>
 
 CrowdSec is a free, open-source and collaborative IPS. Analyze behaviors, respond to attack & share signals across the community.
