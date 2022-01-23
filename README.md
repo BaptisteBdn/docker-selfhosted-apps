@@ -8,6 +8,7 @@ Guide with examples !
 
 * [traefik](traefik/) - reverse proxy and SSL manager
 * [borg-backup](borg-backup/) - backup scripts (local and AWS)
+* [crowdsec](crowdsec/) - collaborative IPS
 * [fail2ban](fail2ban/) - security tool (ban IP)
 * [freshrss](freshrss/) - RSS feed aggregator
 * [gotify](gotify/) - notification service
