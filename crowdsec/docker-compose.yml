@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    restart: unless-stopped
+    environment:
+      - COLLECTIONS="crowdsecurity/traefik"
+      - GID=${PGID}
+    volumes:
+      - ../traefik/log:/var/log/traefik
+      - ./crowdsec-config/acquis.yaml:/etc/crowdsec/acquis.yaml
+      - ./crowdsec-db:/var/lib/crowdsec/data
+    networks:
+      - proxy
+
+  bouncer-traefik:
+    image: fbonalair/traefik-crowdsec-bouncer:latest
+    container_name: crowdsec-bouncer-traefik
+    restart: unless-stopped
+    depends_on:
+      - crowdsec
+    environment:
+      - CROWDSEC_BOUNCER_API_KEY=${TRAEFIK_BOUNCER_KEY}
+      - CROWDSEC_AGENT_HOS=crowdsec:8080
+    networks:
+      - proxy    
+
+networks:
+  proxy:
+    external: true
