@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: redmine-mysql
+    restart: unless-stopped
+    volumes:
+      - ./redmine-mysql/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWD}  # Requested, set the root's password of MySQL service.
+      - MYSQL_PASSWORD=${DB_PASSWD}
+      - MYSQL_DATABASE=redmine
+      - MYSQL_USER=redmine
+      - MYSQL_LOG_CONSOLE=true
+    networks:
+      - redmine-net
+    labels:
+      # Watchtower Update
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  redmine:
+    image: redmine:latest
+    container_name: redmine
+    restart: unless-stopped
+    volumes:
+      - ./data/files:/usr/src/redmine/files
+      - ./data/plugins:/usr/src/redmine/plugins
+      - ./data/themes:/usr/src/redmine/public/themes
+    environment:
+      - REDMINE_DB_MYSQL=redmine-mysql
+      - REDMINE_DB_PASSWORD=${DB_ROOT_PASSWD}
+    networks:
+      - proxy
+      - redmine-net
+    depends_on:
+      - db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.redmine.rule=Host(`${TRAEFIK_REDMINE}`)"
+      - "traefik.http.routers.redmine.entrypoints=https"
+      - "traefik.http.routers.redmine.tls=true"
+      - "traefik.http.routers.redmine.tls.certresolver=mydnschallenge"
+      # Watchtower Update
+      - "com.centurylinklabs.watchtower.enable=true"
+      # Ip filtering
+      - "traefik.http.routers.redmine.middlewares=whitelist@file"
+
+networks:
+  redmine-net:
+  proxy:
+    external: true
