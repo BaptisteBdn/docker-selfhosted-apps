@@ -55,7 +55,7 @@ services:
     container_name: trilium
     restart: unless-stopped
     volumes:
-      - "./data:/data"
+      - "./data:/home/node/trilium-data"
     networks:
       - proxy
     labels:
