@@ -1,17 +1,19 @@
 entryPoints:
   http:
     address: ":80"
-    # Uncomment the following middleware if you are using crowdsec
-    #http:
-    #  middlewares:
-    #    - middleware-crowdsec-bouncer@file
+    http:
+      middlewares:
+        - secHeader@file
+        # Uncomment the following middleware if you are using crowdsec
+        #- middleware-crowdsec-bouncer@file
 
   https:
     address: ":443"
-    # Uncomment the following middleware if you are using crowdsec
-    #http:
-    #  middlewares:
-    #    - middleware-crowdsec-bouncer@file
+    http:
+      middlewares:
+        - secHeader@file
+        # Uncomment the following middleware if you are using crowdsec
+        #- middleware-crowdsec-bouncer@file
 
 providers:
   docker:

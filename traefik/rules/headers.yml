@@ -1,0 +1,13 @@
+http:
+  middlewares:
+    secHeader:
+      headers:
+       customFrameOptionsValue: SAMEORIGIN
+       stsIncludeSubdomains: true
+       stsPreload: true
+       stsSeconds: 31536000
+       contentTypeNosniff: true
+       contentSecurityPolicy: "default-src * blob: data: http: https: 'unsafe-inline' 'unsafe-eval'"
+       referrerPolicy: origin-when-cross-origin
+       customBrowserXSSValue: 1; mode=block
+       permissionsPolicy: "microphone=(), accelerometer=(), battery=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), payment=(), usb=(), vr=(), wake-lock=()"
