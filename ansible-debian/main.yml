@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+  - name: Run apt update before installing prerequisites
+    apt:
+      update_cache: yes
+  vars_files:
+    - vars/main.yml
+  roles:
+    - geerlingguy.docker
+    - ufw

@@ -1,0 +1,55 @@
+---
+
+- name: Install UFW
+  apt:
+    name: ufw
+    state: present
+
+- name: Copy ufw docker rules
+  ansible.builtin.copy:
+    src: etc/ufw/after.rules
+    dest: /etc/ufw/after.rules
+    owner: root
+    group: root
+    mode: '0640'
+
+- name: Restart service UFW
+  ansible.builtin.service:
+    name: ufw
+    state: restarted    
+
+- name: Deny incoming and enable UFW
+  community.general.ufw:
+    state: enabled
+    policy: deny
+    direction: incoming
+
+- name: Set logging
+  community.general.ufw:
+    logging: 'on'
+
+- name: Allow openSSH
+  community.general.ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Allow all access to tcp port 80 and 443
+  community.general.ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  with_items:
+    - '80'
+    - '443'
+
+- name: Allow public networks to access the services provided by the docker containers (80 and 443)
+  community.general.ufw:
+    rule: allow
+    route: yes
+    proto: tcp
+    src: 'any'
+    dest: 'any'
+    to_port: "{{ item }}"
+  with_items:
+    - '80'
+    - '443'
