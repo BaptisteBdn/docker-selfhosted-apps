@@ -17,6 +17,7 @@ entryPoints:
 
 providers:
   docker:
+    network: proxy
     endpoint: "tcp://socket-proxy:2375"
     exposedByDefault: false
 
