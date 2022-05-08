@@ -14,6 +14,8 @@ services:
       - "./traefik.yml:/traefik.yml:ro"
       - "./rules:/rules:ro"
       - "./letsencrypt:/letsencrypt"
+      # Uncomment the following if you are using crowdsec
+      #- "./log:/var/log"
     environment:
       - OVH_ENDPOINT=${OVH_ENDPOINT}
       - OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY}
