@@ -88,7 +88,7 @@ fi
 if [ $OPERATION_STATUS == 0 ]; then
 	# Create Gotify stats
 	BORG_STATS=$(borg info ::${BACKUP_NAME})
-	AWS_STATS=$(aws s3 ls --profile=backup-cli --summarize --recursive s3://aws-vps-backups | tail -1 | awk '{ printf "%.3f GB", $3/1024/1024/1024; }')	
+	AWS_STATS=$(aws s3 ls --profile=${BORG_S3_BACKUP_AWS_PROFILE} --summarize --recursive s3://${BORG_S3_BACKUP_BUCKET} | tail -1 | awk '{ printf "%.3f GB", $3/1024/1024/1024; }')
 	NL=$'\n'
 	
 	STATUS_MESSAGE="Backup successful"
