@@ -6,7 +6,9 @@ if [ ! -f "${ENV_FILE}" ]; then
 	exit 1
 fi
 # Export env variables
-export $(cat $ENV_FILE | sed 's/#.*//g' | xargs)
+set -o allexport
+source .env
+set +o allexport
 
 # Name to give this backup within the borg repo
 BACKUP_NAME=backup-$(date +%Y-%m-%dT%H.%M)
