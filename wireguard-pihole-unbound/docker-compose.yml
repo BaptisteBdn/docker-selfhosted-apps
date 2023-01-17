@@ -2,7 +2,7 @@ version: "3"
 
 services:
   unbound:
-    image: mvance/unbound:latest
+    image: pedantic/unbound:latest
     container_name: unbound
     restart: unless-stopped
     hostname: unbound
