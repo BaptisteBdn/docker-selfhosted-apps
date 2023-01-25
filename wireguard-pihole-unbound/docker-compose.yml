@@ -2,7 +2,7 @@ version: "3"
 
 services:
   unbound:
-    image: mvance/unbound:latest
+    image: pedantic/unbound:latest
     container_name: unbound
     restart: unless-stopped
     hostname: unbound
@@ -29,7 +29,7 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
       - SERVERPORT=51820
-      - SERVERURL=${SERVERURL} #optional
+      # - SERVERURL=${SERVERURL} #optional - For use with DDNS (Uncomment to use)
       - PEERS=${PEERS} # How many peers to generate for you (clients)
       - PEERDNS=10.2.0.100 # Set it to point to pihole
       - INTERNAL_SUBNET=10.6.0.0
@@ -60,9 +60,9 @@ services:
       - 127.0.0.1
       - 10.2.0.200 # Points to unbound
     environment:
-      TZ: "Europe/Paris"
+      TZ: "America/Chicago"
       WEBPASSWORD: "" # Blank password - Can be whatever you want.
-      ServerIP: 10.1.0.100 # Internal IP of pihole
+      ServerIP: 10.2.0.100 # Internal IP of pihole
       DNS1: 10.2.0.200 # Unbound IP
       DNS2: 10.2.0.200 # If we don't specify two, it will auto pick google.
     # Volumes store your data between container upgrades
